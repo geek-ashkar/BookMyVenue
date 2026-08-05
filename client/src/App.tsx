@@ -10,8 +10,8 @@ import AdminLoginPage from "./pages/admin/AdminLoginPage";
 import AddVenuePage from "./pages/owner/AddVenuePage";
 import OwnerVenueView from "./pages/owner/OwnerVenueView";
 import EditVenuePage from "./pages/owner/EditVenuePage";
-
 import ProtectedRoute from "./components/ProtectedRoute";
+import PendingVenuesPage from "./pages/admin/PendingVenuesPage";
 
 function App() {
   return (
@@ -85,6 +85,15 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={["root_admin"]}>
               <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+            path="/admin/pending-venues"
+            element={
+            <ProtectedRoute allowedRoles={["root_admin"]}>
+            <PendingVenuesPage />
             </ProtectedRoute>
           }
         />
