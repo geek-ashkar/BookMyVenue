@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../api/api";
 import type { Venue } from "../../types/venue";
-import "../../styles/OwnerVenueView.css";
+import "./OwnerVenueView.css";
 
 
 function OwnerVenueView() {

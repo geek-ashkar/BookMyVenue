@@ -3,7 +3,7 @@
   import type { Venue } from "../../types/venue";
   import { useNavigate } from "react-router-dom";
 
-  import "../../styles/OwnerDashboard.css";
+  import "./OwnerDashboard.css";
 
 
   function OwnerDashboard() {
