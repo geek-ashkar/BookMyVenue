@@ -107,28 +107,39 @@ function AdminDashboard() {
         <h2 className="section-title"> Summary</h2>
 
       <div className = "dashboard-grid">
-        <div className = "dashboard-card">
+        <div className = "dashboard-card"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/admin/customers")}>
+
           <h3>Customers</h3>
           <h2 className = "dashboard-card-value">
             {summary.users.total_customers}
           </h2>
         </div>
 
-        <div className ="dashboard-card">
+        <div className ="dashboard-card"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/admin/owners")}>
+
           <h3>Owners</h3>
           <h2 className = "dashboard-card-value">
             {summary.users.total_owners}
           </h2>
         </div>
 
-        <div className="dashboard-card">
+        <div className="dashboard-card"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/admin/venues")}>
           <h3>Venues</h3>
           <h2 className="dashboard-card-value">
             {summary.venues.total_venues}
           </h2>
         </div>
 
-        <div className = "dashboard-card">
+        <div className = "dashboard-card"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/admin/payments")}>
+
           <h3>Total Revenue</h3>
           <h2 className="dashboard-card-value">
             € {summary.payments.total_revenue}
@@ -140,7 +151,9 @@ function AdminDashboard() {
 
       <div className = "dashboard-grid">
 
-          <div className="dashboard-card">
+          <div className="dashboard-card"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/admin/bookings")}>
           <h3>Total Bookings</h3>
           <h2 className = "dashboard-card-value">
             {summary.bookings.total_bookings}
@@ -157,14 +170,19 @@ function AdminDashboard() {
           </h2>
          </div>
 
-         <div className = "dashboard-card">
+         <div className = "dashboard-card"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/admin/approved-venues")}>
+
           <h3>Approved Venues</h3>
           <h2 className ="dashboard-card-value">
             {summary.venues.approved_venues}
           </h2>
          </div>
 
-          <div className ="dashboard-card">
+          <div className ="dashboard-card"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/admin/rejected-venues")}>
           <h3>Rejected Venues</h3>
           <h2 className ="dashboard-card-value">
             {summary.venues.rejected_venues}

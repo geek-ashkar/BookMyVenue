@@ -12,6 +12,13 @@ import OwnerVenueView from "./pages/owner/OwnerVenueView";
 import EditVenuePage from "./pages/owner/EditVenuePage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PendingVenuesPage from "./pages/admin/PendingVenuesPage";
+import CustomersPage from "./pages/admin/CustomersPage";
+import OwnersPage from "./pages/admin/OwnersPage";
+import VenuesPage from "./pages/admin/VenuesPage";
+import ApprovedVenuesPage from "./pages/admin/ApprovedVenuesPage";
+import RejectedVenuesPage from "./pages/admin/RejectedVenuesPage";
+import BookingsPage from "./pages/admin/BookingsPage";
+import PaymentsPage from "./pages/admin/PaymentsPage";
 
 function App() {
   return (
@@ -86,6 +93,68 @@ function App() {
             <ProtectedRoute allowedRoles={["root_admin"]}>
               <AdminDashboard />
             </ProtectedRoute>
+          }
+        />
+        <Route
+            path="/admin/customers"
+            element={
+          <ProtectedRoute allowedRoles={["root_admin"]}>
+            <CustomersPage />
+          </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/owners"
+          element={
+          <ProtectedRoute allowedRoles={["root_admin"]}>
+              <OwnersPage />
+          </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/venues"
+          element={
+          <ProtectedRoute allowedRoles={["root_admin"]}>
+            <VenuesPage />
+          </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/approved-venues"
+          element={
+          <ProtectedRoute allowedRoles={["root_admin"]}>
+              <ApprovedVenuesPage />
+          </ProtectedRoute>
+        }
+        />
+
+        <Route
+          path="/admin/rejected-venues"
+          element={
+          <ProtectedRoute allowedRoles={["root_admin"]}>
+            <RejectedVenuesPage />
+          </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/bookings"
+          element={
+          <ProtectedRoute allowedRoles={["root_admin"]}>
+            <BookingsPage />
+          </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/payments"
+          element={
+          <ProtectedRoute allowedRoles={["root_admin"]}>
+            <PaymentsPage />
+          </ProtectedRoute>
           }
         />
 
