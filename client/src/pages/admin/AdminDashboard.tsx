@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { useNavigate } from "react-router-dom";
+import "./AdminDashboard.css";
 
 type UsersSummary = {
   total_customers: number;
@@ -62,6 +64,8 @@ function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
@@ -97,165 +101,143 @@ function AdminDashboard() {
   }
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="dashboard-container">
       <h1>Admin Dashboard</h1>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "20px",
-          marginTop: "30px",
-        }}
-      >
-        <div style={cardStyle}>
+        <h2 className="section-title"> Summary</h2>
+
+      <div className = "dashboard-grid">
+        <div className = "dashboard-card">
           <h3>Customers</h3>
-          <h2 style={cardValueStyle}>
+          <h2 className = "dashboard-card-value">
             {summary.users.total_customers}
           </h2>
         </div>
 
-        <div style={cardStyle}>
+        <div className ="dashboard-card">
           <h3>Owners</h3>
-          <h2 style={cardValueStyle}>
+          <h2 className = "dashboard-card-value">
             {summary.users.total_owners}
           </h2>
         </div>
 
-        <div style={cardStyle}>
+        <div className="dashboard-card">
           <h3>Venues</h3>
-          <h2 style={cardValueStyle}>
+          <h2 className="dashboard-card-value">
             {summary.venues.total_venues}
           </h2>
         </div>
 
-        <div style={cardStyle}>
+        <div className = "dashboard-card">
           <h3>Total Revenue</h3>
-          <h2 style={cardValueStyle}>
+          <h2 className="dashboard-card-value">
             € {summary.payments.total_revenue}
           </h2>
         </div>
+      </div>
 
-        <div style={cardStyle}>
+        <h2 className="section-title"> Operations</h2>
+
+      <div className = "dashboard-grid">
+
+          <div className="dashboard-card">
           <h3>Total Bookings</h3>
-          <h2 style={cardValueStyle}>
+          <h2 className = "dashboard-card-value">
             {summary.bookings.total_bookings}
           </h2>
-        </div>
+          </div>
 
-        <div style={cardStyle}>
-          <h3>Pending Venues</h3>
-          <h2 style={cardValueStyle}>
+         <div className="dashboard-card"
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/admin/pending-venues")}>
+                
+          <h3>Approval Pending Venues</h3>
+          <h2 className="dashboard-card-value">
             {summary.venues.pending_venues}
           </h2>
-        </div>
+         </div>
 
-        <div style={cardStyle}>
+         <div className = "dashboard-card">
           <h3>Approved Venues</h3>
-          <h2 style={cardValueStyle}>
+          <h2 className ="dashboard-card-value">
             {summary.venues.approved_venues}
           </h2>
-        </div>
+         </div>
 
-        <div style={cardStyle}>
+          <div className ="dashboard-card">
           <h3>Rejected Venues</h3>
-          <h2 style={cardValueStyle}>
+          <h2 className ="dashboard-card-value">
             {summary.venues.rejected_venues}
           </h2>
-
-          <h2 style={{ marginTop: "50px" }}>Recent Bookings</h2>
-
-<table
-  style={{
-    width: "100%",
-    borderCollapse: "collapse",
-    marginTop: "20px",
-  }}
->
-  <thead>
-    <tr>
-      <th style={tableHeaderStyle}>Booking ID</th>
-      <th style={tableHeaderStyle}>Customer</th>
-      <th style={tableHeaderStyle}>Venue</th>
-      <th style={tableHeaderStyle}>City</th>
-      <th style={tableHeaderStyle}>Date</th>
-      <th style={tableHeaderStyle}>Time</th>
-      <th style={tableHeaderStyle}>Amount</th>
-      <th style={tableHeaderStyle}>Booking Status</th>
-      <th style={tableHeaderStyle}>Payment Status</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    {summary.recent_bookings.map((booking) => (
-      <tr key={booking.booking_id}>
-        <td style={tableCellStyle}>{booking.booking_id}</td>
-
-        <td style={tableCellStyle}>{booking.customer_name}</td>
-
-        <td style={tableCellStyle}>{booking.venue_name}</td>
-
-        <td style={tableCellStyle}>{booking.venue_city}</td>
-
-        <td style={tableCellStyle}>{booking.booking_date}</td>
-
-        <td style={tableCellStyle}>
-          {booking.start_time} - {booking.end_time}
-        </td>
-
-        <td style={tableCellStyle}>
-          € {booking.total_amount}
-        </td>
-
-        <td style={tableCellStyle}>
-          {booking.booking_status}
-        </td>
-
-        <td style={tableCellStyle}>
-          {booking.payment_status ?? "N/A"}
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-
-        </div>
+          </div>
       </div>
+
+      <div className="venue-request-card">
+          <h2>Venue Requests</h2>
+
+            <p>
+                There are{" "}
+                <strong>{summary.venues.pending_venues}</strong> venue(s)
+                waiting for approval.
+            </p>
+
+          <button
+              className="primary-button"
+              onClick={() => navigate("/admin/pending-venues")}
+              >
+               View Pending Venues
+          </button>
+       </div>
+
+    <div className="recent-bookings">
+
+       <h2>Recent Bookings</h2>
+
+      <table className = "dashboard-table">
+            <thead>
+             <tr>
+               <th className="table-header">Booking ID</th>
+               <th className="table-header">Customer</th>
+               <th className="table-header">Venue</th>
+               <th className="table-header">City</th>
+               <th className="table-header">Date</th>
+               <th className="table-header">Time</th>
+               <th className="table-header">Amount</th>
+               <th className="table-header">Booking Status</th>
+               <th className="table-header">Payment Status</th>
+              </tr>
+            </thead>
+
+          <tbody>
+            {summary.recent_bookings.map((booking) => (
+            <tr key={booking.booking_id}>
+              <td className= "table-cell">{booking.booking_id}</td>
+
+              <td className ="table-cell">{booking.customer_name}</td>
+
+              <td className ="table-cell">{booking.venue_name}</td>
+
+              <td className ="table-cell">{booking.venue_city}</td>
+
+              <td className ="table-cell">{booking.booking_date}</td>
+
+              <td className ="table-cell">{booking.start_time} - {booking.end_time}</td>
+
+              <td className ="table-cell"> € {booking.total_amount}</td>
+
+              <td className ="table-cell">{booking.booking_status}</td>
+
+              <td className ="table-cell">{booking.payment_status ?? "N/A"}</td>
+            </tr>
+            ))}
+          </tbody>
+        </table>
     </div>
-  );
+        
+      
+    </div>
+ );
   
 }
-
-const cardStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  borderRadius: "10px",
-  padding: "20px",
-  textAlign: "center",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-  backgroundColor: "#ffffff",
-  color: "#222",
-};
-
-const cardValueStyle: React.CSSProperties = {
-  fontSize: "36px",
-  marginTop: "15px",
-  color: "#1976d2",
-  fontWeight: "bold",
-};
-
-const tableHeaderStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  padding: "12px",
-  backgroundColor: "#1976d2",
-  color: "#fff",
-  textAlign: "left",
-};
-
-const tableCellStyle: React.CSSProperties = {
-  border: "1px solid #ddd",
-  padding: "10px",
-  backgroundColor: "#fff",
-  color: "#222",
-};
 
 export default AdminDashboard;
