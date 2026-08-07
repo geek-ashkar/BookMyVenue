@@ -19,6 +19,7 @@ import ApprovedVenuesPage from "./pages/admin/ApprovedVenuesPage";
 import RejectedVenuesPage from "./pages/admin/RejectedVenuesPage";
 import BookingsPage from "./pages/admin/BookingsPage";
 import PaymentsPage from "./pages/admin/PaymentsPage";
+import VenueDetailsPage from "./pages/admin/VenuesDetailsPage";
 
 function App() {
   return (
@@ -163,6 +164,15 @@ function App() {
             element={
             <ProtectedRoute allowedRoles={["root_admin"]}>
             <PendingVenuesPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/venues/:id"
+          element={
+            <ProtectedRoute allowedRoles={["root_admin"]}>
+            <VenueDetailsPage/>
             </ProtectedRoute>
           }
         />

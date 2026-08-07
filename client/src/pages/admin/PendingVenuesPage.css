@@ -1,0 +1,58 @@
+.pending-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.pending-title {
+    text-align: center;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.pending-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.pending-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.12);
+}
+
+.pending-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pending-table th {
+    background: #f97ab5;
+    color: white;
+    padding: 14px;
+    text-align: left;
+}
+
+.pending-table td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.pending-table tr:hover {
+    background: #f7f9fc;
+}
+
+.view-button {
+    background: #d39639;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.view-button:hover {
+    background: #125aa3;
+}
