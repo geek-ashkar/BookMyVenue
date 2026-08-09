@@ -29,19 +29,19 @@ router.put("/owner/:id", authMiddleware, allowRoles("owner"), uploadVenueDocumen
 
 router.delete("/owner/:id",authMiddleware,allowRoles("owner"),deleteVenue);
 
-router.get("/", getApprovedVenues);
-
-router.get("/:id", getPublicVenueDetails);
-
 router.get( "/admin/pending", authMiddleware, allowRoles("root_admin"), getPendingVenues);
 
-router.get( "/admin/:id", authMiddleware, allowRoles("root_admin"), getVenueDetailsForAdmin);
-
 router.get("/admin/documents/:documentId/view", authMiddleware, allowRoles("root_admin"),  viewVenueDocumentForAdmin);
+
+router.get( "/admin/:id", authMiddleware, allowRoles("root_admin"), getVenueDetailsForAdmin);
 
 router.patch("/admin/:id/approve", authMiddleware,  allowRoles("root_admin"), approveVenue );
 
 router.patch("/admin/:id/reject", authMiddleware,  allowRoles("root_admin"), rejectVenue);
+
+router.get("/", getApprovedVenues);
+
+router.get("/:id", getPublicVenueDetails);
 
 
 export default router;

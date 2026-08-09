@@ -1,0 +1,68 @@
+.venue-details-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.details-card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.details-card h2 {
+    margin-bottom: 25px;
+    color: #1976d2;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 25px;
+}
+
+.details-grid strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.details-grid p {
+    margin: 0;
+    color: #555;
+}
+.documents-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.documents-table th{
+    background:#d29b61b9;
+    color:white;
+    padding:12px;
+    text-align:left;
+}
+
+.documents-table td{
+    padding:12px;
+    border-bottom:1px solid #ddd;   
+}
+
+.documents-table button{
+    background:#1976d2;
+    color:white;
+    border:none;
+    padding:8px 18px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.documents-table button:hover{
+    background:#125ea7;
+}
