@@ -9,6 +9,7 @@ export interface Venue {
   capacity: number;
   base_price: number;
   approval_status: "pending" | "approved" | "rejected";
+  rejection_reason: string | null;
   is_active: boolean;
   created_at: string;
   updated_at: string;

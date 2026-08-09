@@ -123,6 +123,8 @@
                 </span>
               </div>
 
+              
+
              <div className ="venue-actions"> 
                 <button className="view-btn"
                     onClick={() => navigate(`/owner/venues/${venue.id}`)}>

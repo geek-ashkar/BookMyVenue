@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/api";
 import "./VenueDetailsPage.css";
 
@@ -41,10 +41,13 @@ type Document = {
 function VenueDetailsPage() {
 
     const { id } = useParams();
+    const navigate = useNavigate();    
     const [venue, setVenue] = useState<Venue | null>(null);
     const [documents, setDocuments] = useState<Document[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const [rejectionReason, setRejectionReason] = useState("");
+    const [showRejectBox, setShowRejectBox] = useState(false);
 
 useEffect(() => {
 
@@ -68,9 +71,6 @@ useEffect(() => {
 }, [id ]);
 
 const viewDocument = async (documentId: number) => {
-
-    console.log("View clicked:", documentId);
-
   try {
     const response = await api.get(
       `/venues/admin/documents/${documentId}/view`,
@@ -79,22 +79,44 @@ const viewDocument = async (documentId: number) => {
       }
     );
 
-     console.log("API Response:", response);
-
-
     const fileURL = URL.createObjectURL(response.data);
 
-    console.log("File URL:", fileURL);
-
     window.location.href = fileURL;
-  } catch (error:any) {
-    console.error(error);
-   
-    console.log(error.response?.status);
-    console.log(error.response?.data);
-
-
+  } catch (error) {
+    console.error("Failed to open document:", error);
     alert("Failed to open document.");
+  }
+};
+
+const approveVenue = async () => {
+    try {
+        await api.patch(`/venues/admin/${id}/approve`);
+
+        alert("Venue approved successfully.");
+        navigate("/admin/pending-venues");
+    }catch(error){
+        console.error(error);
+        alert("Failed to approve venue.");
+    }
+}
+
+const rejectVenue = async () => {
+  if (!rejectionReason.trim()) {
+    alert("Please enter a rejection reason.");
+    return;
+  }
+
+  try {
+    await api.patch(`/venues/admin/${id}/reject`, {
+      rejection_reason: rejectionReason,
+    });
+
+    alert("Venue rejected successfully.");
+
+    navigate("/admin/pending-venues");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to reject venue.");
   }
 };
 
@@ -203,6 +225,39 @@ if (!venue) {
             </tbody>
         </table>
 
+    </div>
+
+    <div className="details-card">
+        <div className="review-actions">
+
+        <button className="approve-btn"
+            onClick={approveVenue}>
+            Approve
+        </button>
+
+        <button className="reject-btn"
+        onClick={() => setShowRejectBox(true)}>
+            Reject
+        </button>
+        </div>
+
+        {showRejectBox && (
+            <div className="reject-section">
+
+            <textarea
+                className="reject-textarea"
+                placeholder="Enter rejection reason..."
+                value={rejectionReason}
+                onChange={(e) => setRejectionReason(e.target.value)}
+                />
+
+        <button className="confirm-reject-btn"
+        onClick={rejectVenue}>
+        Confirm Reject
+        </button>
+
+        </div>
+        )}
     </div>
 
   </div>

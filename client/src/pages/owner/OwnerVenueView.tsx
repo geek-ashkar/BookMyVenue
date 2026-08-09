@@ -65,6 +65,13 @@ const statusLabels = {
                 }
             </span>
 
+            {venue.approval_status === "rejected" && venue.rejection_reason && (
+                <div className="rejection-box">
+                <strong>Reason for rejection</strong>
+                <p>{venue.rejection_reason}</p>
+                </div>
+            )}
+
             </div>
             <div className="venue-information">
 

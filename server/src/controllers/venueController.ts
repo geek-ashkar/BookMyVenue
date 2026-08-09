@@ -216,6 +216,7 @@ export const getMyVenues = async (
         v.capacity,
         v.base_price,
         v.approval_status,
+        v.rejection_reason,
         v.is_active,
         v.created_at,
         v.updated_at,
