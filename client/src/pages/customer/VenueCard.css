@@ -1,0 +1,65 @@
+.venue-card {
+  display: flex;
+  gap: 20px;
+
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  padding: 20px;
+  margin-bottom: 20px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.venue-image {
+  width: 220px;
+  height: 160px;
+
+  background: #eeeeee;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: #666;
+  font-weight: bold;
+}
+
+.venue-info {
+  flex: 1;
+}
+
+.venue-info h2 {
+  margin-bottom: 12px;
+}
+
+.venue-info p {
+  margin: 8px 0;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.view-btn {
+  margin-top: 20px;
+
+  background: #1976d2;
+  color: white;
+
+  border: none;
+  border-radius: 6px;
+
+  padding: 10px 20px;
+
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background: #125aa3;
+}

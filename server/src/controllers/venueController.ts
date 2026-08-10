@@ -962,13 +962,19 @@ const client = await pool.connect();
     `
       UPDATE venues
       SET
-       name = $1,
+        name = $1,
         category = $2,
         description = $3,
         address = $4,
         city = $5,
         capacity = $6,
         base_price = $7,
+
+        approval_status = 'pending',
+        rejection_reason =NULL,
+        reviewed_by = NULL,
+        reviewed_at =NULL,
+        
         updated_at = CURRENT_TIMESTAMP
       WHERE id = $8
       AND owner_id = $9
