@@ -4,16 +4,12 @@ import "./VenueCard.css";
 
 type Venue = {
   id: number;
-
   name: string;
-
   category: string;
-
   city: string;
-
   capacity: number;
-
   base_price: string;
+  thumbnail: string | null;
 };
 
 type VenueCardProps = {
@@ -21,14 +17,26 @@ type VenueCardProps = {
 };
 
 function VenueCard({ venue }: VenueCardProps) {
-    
+
     const navigate = useNavigate();
 
   return (
     <div className ="venue-card">
+
         <div className="venue-image">
-            Image Coming Soon
+
+            {venue.thumbnail ? (
+                <img
+                src={`http://localhost:5001/${venue.thumbnail}`}
+                alt={venue.name}
+                className="venue-thumbnail"
+            />
+            ) : (
+            <p>No Image Available</p>
+            )} 
         </div>
+
+
         <div className="venue-info">
             <h2>{venue.name}</h2>
 
@@ -36,7 +44,7 @@ function VenueCard({ venue }: VenueCardProps) {
                 <strong> Category :</strong>{" "}
                 {
                     venue.category .split("_") .map(
-                        (word) => word.charAt(0).toUpperCase + word.slice(1)
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
                     )
                     .join(" ")
                 }

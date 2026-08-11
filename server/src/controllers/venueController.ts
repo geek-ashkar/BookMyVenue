@@ -711,25 +711,48 @@ export const getApprovedVenues = async (
       );
     }
 
-        const query = `
-      SELECT
-        id,
-        owner_id,
-        name,
-        category,
-        description,
-        address,
-        city,
-        capacity,
-        base_price,
-        approval_status,
-        is_active,
-        created_at,
-        updated_at
-      FROM venues
-      WHERE ${conditions.join(" AND ")}
-      ORDER BY created_at DESC
-    `;
+      const query = `
+        SELECT
+          v.id,
+          v.owner_id,
+          v.name,
+          v.category,
+          v.description,
+          v.address,
+          v.city,
+          v.capacity,
+          v.base_price,
+          v.approval_status,
+          v.is_active,
+          v.created_at,
+          v.updated_at,
+
+          MIN(vi.file_path) AS thumbnail
+
+          FROM venues v
+
+        LEFT JOIN venue_images vi
+        ON v.id = vi.venue_id
+
+        WHERE ${conditions.join(" AND ")}
+
+        GROUP BY
+          v.id,
+          v.owner_id,
+          v.name,
+          v.category,
+          v.description,
+          v.address,
+          v.city,
+          v.capacity,
+          v.base_price,
+          v.approval_status,
+          v.is_active,
+          v.created_at,
+          v.updated_at
+
+        ORDER BY v.created_at DESC
+      `;
 
 
     const result = await pool.query(query, values);
@@ -974,7 +997,7 @@ const client = await pool.connect();
         rejection_reason =NULL,
         reviewed_by = NULL,
         reviewed_at =NULL,
-        
+
         updated_at = CURRENT_TIMESTAMP
       WHERE id = $8
       AND owner_id = $9

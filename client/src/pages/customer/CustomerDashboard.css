@@ -1,0 +1,27 @@
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    margin: 80px 0 40px;
+}
+
+.search-input,
+.category-filter,
+.city-filter,
+.price-filter,
+.capacity-filter {
+  width: 420px;
+  height: 38px;
+
+  padding: 0 16px;
+
+  font-size: 16px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+
+  background: white;
+}
