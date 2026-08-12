@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "./VenueCard.css";
 import "./VenueCard.css";
 
+
 type Venue = {
   id: number;
   name: string;

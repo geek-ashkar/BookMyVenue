@@ -19,7 +19,8 @@ import ApprovedVenuesPage from "./pages/admin/ApprovedVenuesPage";
 import RejectedVenuesPage from "./pages/admin/RejectedVenuesPage";
 import BookingsPage from "./pages/admin/BookingsPage";
 import PaymentsPage from "./pages/admin/PaymentsPage";
-import VenueDetailsPage from "./pages/admin/VenuesDetailsPage";
+import CustomerVenueDetailsPage from "./pages/customer/VenueDetailsPage";
+import AdminVenueDetailsPage from "./pages/admin/VenuesDetailsPage";
 
 function App() {
   return (
@@ -48,6 +49,15 @@ function App() {
             <ProtectedRoute allowedRoles={["customer"]}>
               <CustomerDashboard />
             </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/venues/:id"
+          element={
+          <ProtectedRoute allowedRoles={["customer"]}>
+            <CustomerVenueDetailsPage />
+           </ProtectedRoute>
           }
         />
 
@@ -172,7 +182,7 @@ function App() {
           path="/admin/venues/:id"
           element={
             <ProtectedRoute allowedRoles={["root_admin"]}>
-            <VenueDetailsPage/>
+            <AdminVenueDetailsPage/>
             </ProtectedRoute>
           }
         />

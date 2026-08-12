@@ -813,12 +813,22 @@ export const getPublicVenueDetails = async (
         v.updated_at,
 
         u.id AS owner_id,
-        u.name AS owner_name
+        u.name AS owner_name,
+
+        MIN(vi.file_path) AS thumbnail
+
       FROM venues v
       JOIN users u ON u.id = v.owner_id
+      LEFT JOIN venue_images vi
+      ON vi.venue_id = v.id
       WHERE v.id = $1
         AND v.approval_status = 'approved'
         AND v.is_active = true
+
+      GROUP BY
+        v.id,
+        u.id,
+        u.name
     `,
     [venueId]  
     );
