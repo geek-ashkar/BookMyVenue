@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import "./VenueDetailsPage.css";
+import { useNavigate } from "react-router-dom";
 
 type Venue ={
     id : number;
@@ -29,6 +30,7 @@ function VenueDetailsPage () {
     const [venue, setVenue] = useState<Venue | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     useEffect (() => {
         const fetchVenue = async () =>{
@@ -151,13 +153,13 @@ console.log("Thumbnail:", venue.thumbnail);
 
       </div>
 
-      <button className="book-btn">
-        Book Now
+      <button
+        className="book-btn"
+        onClick={() => navigate(`/bookings/new/${venue.id}`)} >
+         Book Now
       </button>
 
       </div>
-
-      
 
     </div>
 

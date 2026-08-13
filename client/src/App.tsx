@@ -21,6 +21,7 @@ import BookingsPage from "./pages/admin/BookingsPage";
 import PaymentsPage from "./pages/admin/PaymentsPage";
 import CustomerVenueDetailsPage from "./pages/customer/VenueDetailsPage";
 import AdminVenueDetailsPage from "./pages/admin/VenuesDetailsPage";
+import CreateBookingPage from "./pages/customer/CreateBookingPage";
 
 function App() {
   return (
@@ -59,6 +60,15 @@ function App() {
             <CustomerVenueDetailsPage />
            </ProtectedRoute>
           }
+        />
+
+        <Route
+          path="/bookings/new/:venueId"
+          element={
+         <ProtectedRoute allowedRoles={["customer"]}>
+             <CreateBookingPage />
+         </ProtectedRoute>
+        }
         />
 
         {/* Owner Dashboard */}

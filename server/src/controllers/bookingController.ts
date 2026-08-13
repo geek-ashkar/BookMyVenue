@@ -228,7 +228,7 @@ export const getMyBookings = async (
         p.payment_provider,
         p.amount AS payment_amount,
         p.payment_status,
-        p.dummy_payment_id
+        p.gateway_payment_id
       FROM bookings b
       JOIN venues v ON v.id = b.venue_id
       LEFT JOIN payments p ON p.booking_id = b.id
@@ -290,7 +290,7 @@ export const getOwnerVenueBookings = async (
             p.id AS payment_id,
             p.payment_provider,
             p.payment_status,
-            p.dummy_payment_id,
+            p.gateway_payment_id,
 
             u.name AS customer_name,
             u.email AS customer_email
@@ -497,7 +497,7 @@ export const getAllBookingsForAdmin = async (
                 p.payment_provider,
                 p.amount AS payment_amount,
                 p.payment_status,
-                p.dummy_payment_id
+                p.gateway_payment_id
 
                 FROM bookings b
                 JOIN users customer ON customer.id = b.customer_id
@@ -574,7 +574,7 @@ export const getBookingDetailsForAdmin = async (
         p.payment_provider,
         p.amount AS payment_amount,
         p.payment_status,
-        p.dummy_payment_id,
+        p.gateway_payment_id,
         p.created_at AS payment_created_at,
         p.updated_at AS payment_updated_at
         FROM bookings b

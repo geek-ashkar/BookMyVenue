@@ -89,27 +89,6 @@ ADD COLUMN IF NOT EXISTS reviewed_by INTEGER REFERENCES users(id);
 ALTER TABLE venues
 ADD COLUMN IF NOT EXISTS reviewed_at TIMESTAMP;
 
-CREATE TABLE IF NOT EXISTS bookings (
-  id SERIAL PRIMARY KEY,
-  customer_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  venue_id INTEGER NOT NULL REFERENCES venues(id) ON DELETE CASCADE,
-
-  booking_date DATE NOT NULL,
-  start_time TIME NOT NULL,
-  end_time TIME NOT NULL,
-
-  total_amount NUMERIC(10,2) NOT NULL CHECK(total_amount>=0),
-
-  booking_status VARCHAR(30) NOT NULL DEFAULT 'pending_payment' CHECK (
-  booking_status IN ('pending_payment', 'confirmed', 'cancelled', 'failed')
-  ),
-
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  
-  CHECK (end_time > start_time)
-
-);
 
 CREATE TABLE IF NOT EXISTS payments (
   id SERIAL PRIMARY KEY,
@@ -118,14 +97,50 @@ CREATE TABLE IF NOT EXISTS payments (
 
   payment_provider VARCHAR(50) NOT NULL DEFAULT 'razorpay_dummy',
 
-  amount NUMERIC(10, 2) NOT NULL CHECK (amount >= 0),
+  amount NUMERIC(10,2) NOT NULL CHECK(amount >= 0),
 
-  payment_status VARCHAR(30) NOT NULL DEFAULT 'pending' CHECK (
-    payment_status IN ('pending', 'success', 'failed', 'refunded')
+  payment_status VARCHAR(30) NOT NULL DEFAULT 'pending'
+  CHECK (
+    payment_status IN ('pending','success','failed','refunded')
   ),
 
-  dummy_payment_id VARCHAR(100),
+  gateway_order_id VARCHAR(255),
+
+  gateway_payment_id VARCHAR(255),
 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS bookings (
+  id SERIAL PRIMARY KEY,
+
+  customer_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  venue_id INTEGER NOT NULL REFERENCES venues(id) ON DELETE CASCADE,
+
+  booking_date DATE NOT NULL,
+  start_time TIME NOT NULL,
+  end_time TIME NOT NULL,
+
+  total_amount NUMERIC(10,2) NOT NULL CHECK (total_amount >= 0),
+
+  booking_status VARCHAR(20) NOT NULL DEFAULT 'pending'
+    CHECK (
+      booking_status IN (
+        'pending',
+        'confirmed',
+        'cancelled'
+      )
+    ),
+
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  CHECK (end_time > start_time)
+);
+
+ALTER TABLE payments
+ADD COLUMN IF NOT EXISTS gateway_order_id VARCHAR(255);
+
+ALTER TABLE payments
+ADD COLUMN IF NOT EXISTS gateway_payment_id VARCHAR(255);
