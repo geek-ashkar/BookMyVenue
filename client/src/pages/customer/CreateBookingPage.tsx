@@ -13,8 +13,6 @@ type Venue = {
 };
 
 
-
-
 function CreateBookingPage() {
   const { venueId } = useParams();
 
@@ -22,8 +20,9 @@ function CreateBookingPage() {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [venue, setVenue] = useState<Venue | null>(null);
+  const [showSummary, setShowSummary] = useState(false);
 
-    useEffect(() => {
+    useEffect(() =>{
 
     const fetchVenue = async () => {
         try {
@@ -32,110 +31,157 @@ function CreateBookingPage() {
         } catch (error) {
             console.error(error);
         }
-    };
-    fetchVenue();
+        };
+        fetchVenue();
+    }, [venueId]);
 
-}, [venueId]);
+    const handleContinue = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!bookingDate || !startTime || !endTime) {
+        alert("Please fill all fields.");
+        return;
+    }
+
+    if (startTime >= endTime) {
+        alert("End time must be after start time.");
+        return;
+    }
+
+    setShowSummary(true);
+    };
 
   return (
- 
-    <div className="booking-layout">
-    <div className="booking-page">
+  <div className="booking-page">
 
-      <div className="booking-card">
+    <div className="booking-card">
 
-        <h1>Book Venue</h1>
+      <h1>Book Venue</h1>
 
-        <p className="venue-id">
-          Venue : {venue?.name}
-        </p>
+      <p className="venue-id">
+        Venue : <strong>{venue?.name}</strong>
+      </p>
 
-        <form>
+      <form onSubmit={handleContinue}>
+
+        <div className="form-group">
+          <label>Booking Date</label>
+
+          <input
+            type="date"
+            value={bookingDate}
+            onChange={(e) => setBookingDate(e.target.value)}
+          />
+        </div>
+
+        <div className="time-row">
 
           <div className="form-group">
-            <label>Booking Date</label>
+            <label>Start Time</label>
 
             <input
-              type="date"
-              value={bookingDate}
-              onChange={(e) => setBookingDate(e.target.value)}
+              type="time"
+              value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
             />
           </div>
 
-           <div className="time-row">
+          <div className="form-group">
+            <label>End Time</label>
 
-            <div className="form-group">
-                 <label>Start Time</label>
+            <input
+              type="time"
+              value={endTime}
+              onChange={(e) => setEndTime(e.target.value)}
+            />
+          </div>
 
-                <input
-                type="time"
-                value={startTime}
-                onChange={(e) => setStartTime(e.target.value)}
-                />
-            </div>
+        </div>
 
-            <div className="form-group">
-                <label>End Time</label>
+        {!showSummary && (
+          <>
+            <p className="booking-note">
+              Your booking will be confirmed after reviewing the details.
+            </p>
 
-                <input
-                type="time"
-                value={endTime}
-                onChange={(e) => setEndTime(e.target.value)}
-                />
-            </div>
+            <button type="submit" className="continue-btn">
+              Continue
+            </button>
+          </>
+        )}
 
-            </div>
+      </form>
 
-          <button type="submit">
-            Confirm Booking
-          </button>
+      {showSummary && (
 
-        </form>
+        <div className="booking-review">
 
-      </div>
+          <h2>Booking Summary</h2>
+
+          <div className="review-row">
+            <span>🏛 Venue</span>
+            <strong>{venue?.name}</strong>
+          </div>
+
+          <div className="review-row">
+            <span>📂 Category</span>
+            <strong>{venue?.category.replace("_", " ")}</strong>
+          </div>
+
+          <div className="review-row">
+            <span>📍 City</span>
+            <strong>{venue?.city}</strong>
+          </div>
+
+          <div className="review-row">
+            <span>📅 Date</span>
+            <strong>{bookingDate}</strong>
+          </div>
+
+          <div className="review-row">
+            <span>🕒 Time</span>
+            <strong>
+              {startTime} - {endTime}
+            </strong>
+          </div>
+
+          <div className="price-section">
+
+            <p>Total Price</p>
+
+            <h2>
+              € {Number(venue?.base_price).toLocaleString()}
+            </h2>
+
+          </div>
+
+          <div className="review-buttons">
+
+            <button
+              type="button"
+              className="edit-btn"
+              onClick={() => setShowSummary(false)}
+            >
+              Edit
+            </button>
+
+            <button
+              type="button"
+              className="confirm-btn"
+            >
+              Confirm Booking
+            </button>
+
+          </div>
+
+        </div>
+
+      )}
 
     </div>
-    <div className="booking-summary">
-        <h2>Booking Summary</h2>
 
-<div className="summary-card">
-
-    <p>
-        <strong>Venue</strong>
-    </p>
-
-    <p>{venue?.name}</p>
-
-    <hr />
-
-    <p>
-        <strong>Category</strong>
-    </p>
-
-    <p>{venue?.category?.replace("_", " ")}</p>
-
-    <hr />
-
-    <p>
-        <strong>City</strong>
-    </p>
-
-    <p>{venue?.city}</p>
-
-    <hr />
-
-    <p>
-        <strong>Price</strong>
-    </p>
-
-    <h3>
-        € {Number(venue?.base_price).toLocaleString()}
-    </h3>
-
-</div>
-    </div>
-    </div>
-  );
+  </div>
+);
 }
 
 export default CreateBookingPage;

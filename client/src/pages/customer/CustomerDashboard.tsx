@@ -41,6 +41,7 @@ function CustomerDashboard() {
     fetchVenues();
   }, []);
 
+  
   if (loading) {
     return <h2>Loading venues...</h2>;
   }

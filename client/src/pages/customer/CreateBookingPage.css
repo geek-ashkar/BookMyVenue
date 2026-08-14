@@ -1,129 +1,117 @@
-.booking-page{
-    width : 100%;
+body{
+    background:#f5f7fb;
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
 }
+
+/* ===========================
+   Main Page
+=========================== */
+
+.booking-page{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:50px 20px;
+}
+
+/* ===========================
+   Main Card
+=========================== */
 
 .booking-card{
 
-    width:100%; 
-    max-width:none;
+    width:100%;
+    max-width:700px;
 
     background:white;
 
-    padding:35px;
+    padding:45px;
 
-    border-radius:16px;
+    border-radius:20px;
 
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
 }
 
+/* ===========================
+   Heading
+=========================== */
+
 .booking-card h1{
-    margin-top:0;
-    margin-bottom:10px;
+
+    margin:0;
+
+    text-align:center;
+
+    font-size:52px;
+
+    color:#1f2937;
 }
 
 .venue-id{
-    color:#777;
-    margin-bottom:30px;
+
+    text-align:center;
+
+    color:#6b7280;
+
+    font-size:22px;
+
+    margin:12px 0 40px;
 }
 
+/* ===========================
+   Form
+=========================== */
+
 .form-group{
+
     display:flex;
+
     flex-direction:column;
-    margin-bottom:20px;
+
+    margin-bottom:25px;
 }
 
 .form-group label{
-    margin-bottom:8px;
+
+    font-size:18px;
+
     font-weight:bold;
+
+    margin-bottom:10px;
+
+    color:#374151;
 }
 
 .form-group input{
 
-    padding:12px;
+    padding:15px;
 
-    border:1px solid #dcdcdc;
+    border:1px solid #d1d5db;
 
-    border-radius:8px;
-
-    font-size:16px;
-}
-
-.booking-card button{
-
-    width:100%;
-
-    margin-top:15px;
-
-    padding:14px;
-
-    background:#2563eb;
-
-    color:white;
-
-    border:none;
-
-    border-radius:8px;
+    border-radius:10px;
 
     font-size:18px;
 
-    cursor:pointer;
+    transition:.25s;
 }
 
-.booking-card button:hover{
+.form-group input:focus{
 
-    background:#1d4ed8;
+    outline:none;
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.15);
 }
 
+/* ===========================
+   Time Row
+=========================== */
 
-.booking-layout{
-
-    max-width:1200px;
-
-    margin:40px auto;
-
-    display:grid;
-
-    grid-template-columns:2fr 1fr;
-
-    gap:40px;
-
-    align-items:start;
-}
-
-.booking-summary{
-
-    position:sticky;
-
-    top:30px;
-}
-
-.summary-card{
-
-    background:white;
-
-    border-radius:15px;
-
-    padding:25px;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-.summary-card hr{
-
-    margin:18px 0;
-
-    border:none;
-
-    border-top:1px solid #ececec;
-}
-
-.summary-card h3{
-
-    color:#16a34a;
-
-    font-size:34px;
-
-    margin-top:10px;
-}
 .time-row{
 
     display:grid;
@@ -131,4 +119,247 @@
     grid-template-columns:1fr 1fr;
 
     gap:20px;
+}
+
+/* ===========================
+   Booking Note
+=========================== */
+
+.booking-note{
+
+    margin:10px 0 30px;
+
+    text-align:center;
+
+    color:#6b7280;
+
+    font-size:17px;
+
+    line-height:1.6;
+}
+
+/* ===========================
+   Continue Button
+=========================== */
+
+.continue-btn{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.continue-btn:hover{
+
+    background:#1d4ed8;
+}
+
+/* ===========================
+   Booking Summary
+=========================== */
+
+.booking-review{
+
+    margin-top:45px;
+
+    border-top:2px solid #ececec;
+
+    padding-top:35px;
+}
+
+.booking-review h2{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    color:#111827;
+}
+
+/* ===========================
+   Review Rows
+=========================== */
+
+.review-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 0;
+
+    border-bottom:1px solid #ececec;
+}
+
+.review-row span{
+
+    color:#6b7280;
+
+    font-size:17px;
+}
+
+.review-row strong{
+
+    color:#111827;
+
+    font-size:18px;
+}
+
+/* ===========================
+   Price
+=========================== */
+
+.price-section{
+
+    margin:35px 0;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    background:#f0fdf4;
+
+    text-align:center;
+
+    border:1px solid #bbf7d0;
+}
+
+.price-section p{
+
+    margin:0;
+
+    color:#6b7280;
+
+    font-size:16px;
+}
+
+.price-section h2{
+
+    margin-top:12px;
+
+    color:#16a34a;
+
+    font-size:48px;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.review-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:20px;
+}
+
+.edit-btn{
+
+    flex:1;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#e5e7eb;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.edit-btn:hover{
+
+    background:#d1d5db;
+}
+
+.confirm-btn{
+
+    flex:2;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#16a34a;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.confirm-btn:hover{
+
+    background:#15803d;
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width:768px){
+
+    .booking-card{
+
+        padding:30px;
+    }
+
+    .booking-card h1{
+
+        font-size:38px;
+    }
+
+    .venue-id{
+
+        font-size:18px;
+    }
+
+    .time-row{
+
+        grid-template-columns:1fr;
+    }
+
+    .review-buttons{
+
+        flex-direction:column;
+    }
+
+    .price-section h2{
+
+        font-size:36px;
+    }
 }
