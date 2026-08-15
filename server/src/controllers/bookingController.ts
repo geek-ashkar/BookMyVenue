@@ -34,6 +34,18 @@ export const createBooking = async (
     return;
   }
 
+  const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const selectedDate = new Date(booking_date);
+
+if (selectedDate < today) {
+  res.status(400).json({
+    message: "Booking date cannot be in the past.",
+  });
+  return;
+}
+
   if (!timeRegex.test(start_time) || !timeRegex.test(end_time)) {
     res.status(400).json({
       message: "start_time and end_time must be in HH:MM format.",

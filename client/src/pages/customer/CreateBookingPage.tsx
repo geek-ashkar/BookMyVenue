@@ -21,6 +21,7 @@ function CreateBookingPage() {
   const [endTime, setEndTime] = useState("");
   const [venue, setVenue] = useState<Venue | null>(null);
   const [showSummary, setShowSummary] = useState(false);
+  const today = new Date().toISOString().split("T")[0];
 
     useEffect(() =>{
 
@@ -51,6 +52,31 @@ function CreateBookingPage() {
     setShowSummary(true);
     };
 
+    const handleConfirmBooking = async () => {
+    try {
+
+        const response = await api.post("/bookings", {
+            venue_id: Number(venueId),
+            booking_date: bookingDate,
+            start_time: startTime,
+            end_time: endTime,
+        });
+
+        alert(response.data.message);
+
+    } catch (error: any) {
+
+        console.error(error);
+
+        alert(
+            error.response?.data?.message ||
+            "Failed to create booking."
+        );
+    }
+ };
+
+
+
   return (
   <div className="booking-page">
 
@@ -69,6 +95,7 @@ function CreateBookingPage() {
 
           <input
             type="date"
+             min={today}
             value={bookingDate}
             onChange={(e) => setBookingDate(e.target.value)}
           />
@@ -168,6 +195,7 @@ function CreateBookingPage() {
             <button
               type="button"
               className="confirm-btn"
+              onClick={handleConfirmBooking} 
             >
               Confirm Booking
             </button>
