@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./CreateBookingPage.css";
 import { useEffect } from "react";
@@ -22,6 +22,8 @@ function CreateBookingPage() {
   const [venue, setVenue] = useState<Venue | null>(null);
   const [showSummary, setShowSummary] = useState(false);
   const today = new Date().toISOString().split("T")[0];
+
+  const navigate = useNavigate();
 
     useEffect(() =>{
 
@@ -62,7 +64,12 @@ function CreateBookingPage() {
             end_time: endTime,
         });
 
-        alert(response.data.message);
+        navigate("/booking-success", {
+        state: {
+        booking: response.data.booking,
+        payment: response.data.payment,
+    },
+});
 
     } catch (error: any) {
 
@@ -196,7 +203,7 @@ function CreateBookingPage() {
               type="button"
               className="confirm-btn"
               onClick={handleConfirmBooking} 
-            >
+              >
               Confirm Booking
             </button>
 

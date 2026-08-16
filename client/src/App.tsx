@@ -22,6 +22,8 @@ import PaymentsPage from "./pages/admin/PaymentsPage";
 import CustomerVenueDetailsPage from "./pages/customer/VenueDetailsPage";
 import AdminVenueDetailsPage from "./pages/admin/VenuesDetailsPage";
 import CreateBookingPage from "./pages/customer/CreateBookingPage";
+import BookingSuccessPage from "./pages/customer/BookingSuccessPage";
+import MyBookingsPage from "./pages/customer/MyBookingsPage";
 
 function App() {
   return (
@@ -68,6 +70,24 @@ function App() {
          <ProtectedRoute allowedRoles={["customer"]}>
              <CreateBookingPage />
          </ProtectedRoute>
+        }
+        />
+
+        <Route
+        path="/booking-success"
+        element={
+        <ProtectedRoute allowedRoles={["customer"]}>
+            <BookingSuccessPage />
+        </ProtectedRoute>
+        }
+        />
+
+        <Route
+          path="/customer/my-bookings"
+          element={
+        <ProtectedRoute allowedRoles={["customer"]}>
+        <MyBookingsPage />
+        </ProtectedRoute>
         }
         />
 
