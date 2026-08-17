@@ -24,6 +24,7 @@ import AdminVenueDetailsPage from "./pages/admin/VenuesDetailsPage";
 import CreateBookingPage from "./pages/customer/CreateBookingPage";
 import BookingSuccessPage from "./pages/customer/BookingSuccessPage";
 import MyBookingsPage from "./pages/customer/MyBookingsPage";
+import PaymentPage from "./pages/customer/PaymentPage";
 
 function App() {
   return (
@@ -87,6 +88,15 @@ function App() {
           element={
         <ProtectedRoute allowedRoles={["customer"]}>
         <MyBookingsPage />
+        </ProtectedRoute>
+        }
+        />
+
+        <Route
+        path="/payment/:bookingId"
+        element={
+        <ProtectedRoute allowedRoles={["customer"]}>
+        <PaymentPage />
         </ProtectedRoute>
         }
         />

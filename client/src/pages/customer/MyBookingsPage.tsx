@@ -17,6 +17,8 @@ type Booking = {
 
   booking_status: string;
   payment_status: string;
+
+  created_at: string;
 };
 
 function MyBookingsPage() {
@@ -86,13 +88,27 @@ function MyBookingsPage() {
 
               <div>
 
-                <h2>{booking.venue_name}</h2>
+                <h2><strong>{booking.venue_name}</strong></h2>
 
                 <p className="booking-category">
-                  {booking.category.replace("_", " ")}
+                {booking.category.replace("_", " ")}
                 </p>
 
-              </div>
+                <p className="booked-on">
+                Booked on{" "}
+                {new Date(booking.created_at).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                })}
+                {" • "}
+                {new Date(booking.created_at).toLocaleTimeString("en-GB", {
+                hour: "2-digit",
+                minute: "2-digit",
+                })}
+            </p>
+
+            </div>
 
               <span
                 className={`status ${booking.booking_status}`}
@@ -104,9 +120,10 @@ function MyBookingsPage() {
 
             <div className="booking-details">
 
+
               <div>
                 📅
-                <strong>Date</strong>
+                <strong>Event Date</strong>
                 <span>{booking.booking_date}</span>
               </div>
 

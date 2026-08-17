@@ -9,6 +9,7 @@ import {
 } from "../controllers/bookingController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { allowRoles } from "../middleware/roleMiddleware.js";
+import { payForBooking } from "../controllers/paymentController.js";
 
 const  router = Router();
 
@@ -24,6 +25,6 @@ router.get("/admin/:id", authMiddleware, allowRoles("root_admin"), getBookingDet
 
 router.patch("/:id/cancel", authMiddleware, allowRoles("customer"), cancelMyBooking);
 
+router.patch("/:bookingId/pay", authMiddleware, allowRoles("customer"), payForBooking);
 
 export default router;
-
