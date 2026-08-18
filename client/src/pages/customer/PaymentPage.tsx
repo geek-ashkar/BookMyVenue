@@ -1,10 +1,11 @@
-
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import api from "../../services/api";
 import "./PaymentPage.css";
 
 function PaymentPage() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const booking = location.state?.booking;
 
@@ -17,6 +18,37 @@ function PaymentPage() {
       </h2>
     );
   }
+
+  const handlePayment = async () => {
+  try {
+
+    const response = await api.patch(
+      `/bookings/${booking.id}/pay`,
+      {
+        booking_id: booking.id,
+      }
+    );
+
+    alert(response.data.message);
+
+    navigate("/booking-success", {
+      state: {
+        booking: response.data.booking,
+        payment: response.data.payment,
+      },
+    });
+
+  } catch (error: any) {
+
+    console.error(error);
+
+    alert(
+      error.response?.data?.message ||
+      "Payment failed."
+    );
+
+  }
+  };
 
   return (
     <div className="payment-page">
@@ -116,7 +148,8 @@ function PaymentPage() {
 
         </div>
 
-        <button className="pay-btn">
+        <button className="pay-btn"
+          onClick={handlePayment}>
           Pay Now
         </button>
 

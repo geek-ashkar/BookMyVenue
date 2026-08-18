@@ -2,7 +2,7 @@ import type { Response } from "express";
 import { pool } from "../config/db.js";
 import type { AuthRequest } from "../middleware/authMiddleware.js";
 
-export const dummyPaymentSuccess = async (
+export const payForBooking = async (
   req: AuthRequest,
   res: Response
 ): Promise<void> => {

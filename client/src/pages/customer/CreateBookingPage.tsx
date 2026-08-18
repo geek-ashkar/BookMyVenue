@@ -64,7 +64,7 @@ function CreateBookingPage() {
             end_time: endTime,
         });
 
-        navigate("/booking-success", {
+        navigate(`/payment/${response.data.booking.id}`, {
         state: {
         booking: response.data.booking,
         payment: response.data.payment,

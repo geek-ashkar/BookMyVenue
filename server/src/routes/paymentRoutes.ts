@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { dummyPaymentSuccess } from "../controllers/paymentContoller.js";
+import { payForBooking } from "../controllers/paymentController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { allowRoles } from "../middleware/roleMiddleware.js";
 
@@ -9,7 +9,7 @@ router.post(
     "/dummy-success",
     authMiddleware,
     allowRoles("customer"),
-    dummyPaymentSuccess
+    payForBooking
 );
 
 export default router;

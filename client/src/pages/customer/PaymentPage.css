@@ -29,17 +29,17 @@
 }
 
 .payment-card h1{
-
+    padding : 20px;
     margin-top:0;
-
+    
     margin-bottom:8px;
 }
 
 .payment-subtitle{
 
-    color:#6b7280;
+    color:#e43170;
 
-    margin-bottom:35px;
+    margin-bottom:40px;
 }
 
 .payment-summary{
