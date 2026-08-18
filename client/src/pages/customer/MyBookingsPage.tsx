@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./MyBookingsPage.css";
-
 
 type Booking = {
   booking_id: number;
@@ -25,6 +25,7 @@ function MyBookingsPage() {
 
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -52,9 +53,51 @@ function MyBookingsPage() {
 
   }, []);
 
+  const handleCancelBooking = async (bookingId: number) => {
+
+  const confirmCancel = window.confirm(
+    "Are you sure you want to cancel this booking?"
+  );
+
+  if (!confirmCancel) {
+    return;
+  }
+
+  try {
+
+    const response = await api.patch(
+      `/bookings/${bookingId}/cancel`
+    );
+
+    alert(response.data.message);
+
+    setBookings((previousBookings) =>
+      previousBookings.map((booking) =>
+        booking.booking_id === bookingId
+          ? {
+              ...booking,
+              booking_status: "cancelled",
+              payment_status: "cancelled",
+            }
+          : booking
+      )
+    );
+
+  } catch (error: any) {
+
+    console.error(error);
+
+    alert(
+      error.response?.data?.message ||
+      "Failed to cancel booking."
+    );
+  }
+};
+
   if (loading) {
     return <h2>Loading bookings...</h2>;
   }
+
 
   return (
   <div className="my-bookings-page">
@@ -174,7 +217,12 @@ function MyBookingsPage() {
                 {(booking.booking_status === "pending_payment" ||
                   booking.booking_status === "confirmed") && (
 
-                  <button className="cancel-btn">
+                  <button
+                   className="cancel-btn"
+                   onClick={() =>
+                   handleCancelBooking(booking.booking_id)
+                   }
+                    >
                     Cancel Booking
                   </button>
 

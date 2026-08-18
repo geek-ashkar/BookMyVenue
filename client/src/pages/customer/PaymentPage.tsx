@@ -70,7 +70,14 @@ function PaymentPage() {
 
           <div className="summary-row">
             <span>Booking Date</span>
-            <strong>{booking.booking_date}</strong>
+            
+            <strong>
+            {new Date(booking.booking_date).toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })}
+            </strong>
           </div>
 
           <div className="summary-row">
