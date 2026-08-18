@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./MyBookingsPage.css";
 
@@ -25,7 +24,7 @@ function MyBookingsPage() {
 
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
 
   useEffect(() => {
 
@@ -210,7 +209,10 @@ function MyBookingsPage() {
 
               <div className="booking-buttons">
 
-                <button className="details-btn">
+                <button
+                  className="details-btn"
+                  onClick={() => setSelectedBooking(booking)}
+                  >
                   View Details
                 </button>
 
@@ -218,8 +220,8 @@ function MyBookingsPage() {
                   booking.booking_status === "confirmed") && (
 
                   <button
-                   className="cancel-btn"
-                   onClick={() =>
+                  className="cancel-btn"
+                  onClick={() =>
                    handleCancelBooking(booking.booking_id)
                    }
                     >
@@ -239,6 +241,102 @@ function MyBookingsPage() {
       </div>
 
     )}
+
+    {selectedBooking && (
+
+  <div
+    className="booking-modal-overlay"
+    onClick={() => setSelectedBooking(null)}
+  >
+
+    <div
+      className="booking-modal"
+      onClick={(e) => e.stopPropagation()}
+    >
+
+      <h2>Booking Details</h2>
+
+      <div className="modal-row">
+        <span>Booking ID</span>
+        <strong>#{selectedBooking.booking_id}</strong>
+      </div>
+
+      <div className="modal-row">
+        <span>Venue</span>
+        <strong>{selectedBooking.venue_name}</strong>
+      </div>
+
+      <div className="modal-row">
+        <span>Category</span>
+        <strong>
+          {selectedBooking.category.replace("_", " ")}
+        </strong>
+      </div>
+
+      <div className="modal-row">
+        <span>City</span>
+        <strong>{selectedBooking.city}</strong>
+      </div>
+
+      <div className="modal-row">
+        <span>Event Date</span>
+        <strong>
+          {new Date(selectedBooking.booking_date).toLocaleDateString(
+            "en-GB",
+            {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            }
+          )}
+        </strong>
+      </div>
+
+      <div className="modal-row">
+        <span>Booked On</span>
+        <strong>
+          {new Date(selectedBooking.created_at).toLocaleString(
+            "en-GB"
+          )}
+        </strong>
+      </div>
+
+      <div className="modal-row">
+        <span>Time</span>
+        <strong>
+          {selectedBooking.start_time} - {selectedBooking.end_time}
+        </strong>
+      </div>
+
+      <div className="modal-row">
+        <span>Total Amount</span>
+        <strong>
+          € {Number(selectedBooking.total_amount).toLocaleString()}
+        </strong>
+      </div>
+
+      <div className="modal-row">
+        <span>Booking Status</span>
+        <strong>{selectedBooking.booking_status}</strong>
+      </div>
+
+      <div className="modal-row">
+        <span>Payment Status</span>
+        <strong>{selectedBooking.payment_status}</strong>
+      </div>
+
+      <button
+        className="close-modal-btn"
+        onClick={() => setSelectedBooking(null)}
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+)}
 
   </div>
 );
