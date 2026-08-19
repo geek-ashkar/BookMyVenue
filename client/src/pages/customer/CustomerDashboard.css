@@ -1,27 +1,90 @@
-.filter-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+.filter-bar{
+    max-width:1000px;
+    margin:45px auto;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
 
-    margin: 80px 0 40px;
+.filter-row{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.search-input{
+    width:420px;
+    height:42px;
+    padding:0 16px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:15px;
+}
+
+.category-filter{
+    width:280px;
+    height:42px;
+    padding:0 14px;
+    border-radius:10px;
+}
+
+.city-filter,
+.price-filter,
+.capacity-filter{
+    width:220px;
+    height:42px;
+    padding:0 14px;
+    border-radius:10px;
 }
 
 .search-input,
 .category-filter,
 .city-filter,
 .price-filter,
-.capacity-filter {
-  width: 420px;
-  height: 38px;
+.capacity-filter{
+    border:1px solid #d1d5db;
+    background:rgb(244, 244, 243);
+    font-size:15px;
+    transition:.2s;
+}
 
-  padding: 0 16px;
+.search-input:focus,
+.category-filter:focus,
+.city-filter:focus,
+.price-filter:focus,
+.capacity-filter:focus{
+    outline:none;
+    border-color:#f4f4f6;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
 
-  font-size: 16px;
+.dashboard-header{
 
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
+    text-align:center;
 
-  background: white;
+    margin:30px 0 45px;
+}
+
+.dashboard-header h1{
+
+    font-size:54px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:30px;
+    
+}
+
+.dashboard-header p{
+    font-size:20px;
+    color:#6b7280;
+    margin:0;
+}
+.venues-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
+    gap:48px;
+    margin-top:50px;
+    max-width:1400px;
+    margin:50px auto 0;
 }
