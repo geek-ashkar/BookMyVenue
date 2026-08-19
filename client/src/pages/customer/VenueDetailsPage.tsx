@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import "./VenueDetailsPage.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 
 type Venue ={
     id : number;
@@ -24,24 +24,36 @@ type Venue ={
 
 }
 
+type NearbyVenue = {
+  id: number;
+  name: string;
+  category: string;
+  city: string;
+  base_price: string;
+  thumbnail: string | null;
+};
+
 function VenueDetailsPage () {
 
-    const {id} = useParams();
-    const [venue, setVenue] = useState<Venue | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
+ const {id} = useParams();
+ const [venue, setVenue] = useState<Venue | null>(null);
+ const [loading, setLoading] = useState(true);
+ const [error, setError] = useState("");
+ const navigate = useNavigate();
+ const [nearbyVenues, setNearbyVenues] = useState<NearbyVenue[]>([]);
 
     useEffect (() => {
-        const fetchVenue = async () =>{
+            const fetchVenue = async () =>{
             try{
                 const response = await api.get(`/venues/${id}`);
 
-console.log(response.data);
-console.log(response.data.venue);
-
                 setVenue(response.data.venue);
+
+              const nearbyResponse = await api.get(`/venues/${id}/nearby`);
+              setNearbyVenues(nearbyResponse.data.nearbyVenues);
+
             }catch(error){
+
                 console.error(error);
 
                 setError("Failed to load venue.");
@@ -52,7 +64,6 @@ console.log(response.data.venue);
 
         fetchVenue();
     }, [id]);
-console.log("Fetching:", `/venues/${id}`);
 
     if(loading){
         return <h2>Loading venue ..</h2>;
@@ -65,8 +76,7 @@ console.log("Fetching:", `/venues/${id}`);
     if(!venue){
         return <h2> Venue not found</h2>;
     }
-console.log("Venue:", venue);
-console.log("Thumbnail:", venue.thumbnail);
+
   return (
   <div className="venue-details-container">
 
@@ -161,11 +171,123 @@ console.log("Thumbnail:", venue.thumbnail);
 
       </div>
 
+      </div>
+
+        <div className="nearby-section">
+
+  <div className="nearby-header">
+
+    <h2>Nearby Venues</h2>
+
+    <div className="nearby-controls">
+
+      <button
+        className="scroll-btn"
+        onClick={() =>
+          document
+            .getElementById("nearby-slider")
+            ?.scrollBy({
+              left: -320,
+              behavior: "smooth",
+            })
+        }
+      >
+        ◀
+      </button>
+
+      <button
+        className="scroll-btn"
+        onClick={() =>
+          document
+            .getElementById("nearby-slider")
+            ?.scrollBy({
+              left: 320,
+              behavior: "smooth",
+            })
+        }
+      >
+        ▶
+      </button>
+
     </div>
 
   </div>
-);
-}
+
+  {nearbyVenues.length === 0 ? (
+
+    <p>No nearby venues found.</p>
+
+  ) : (
+
+    <div
+      id="nearby-slider"
+      className="nearby-slider"
+    >
+
+      {nearbyVenues.map((venue) => (
+
+        <div
+          key={venue.id}
+          className="nearby-card"
+        >
+
+          {venue.thumbnail ? (
+
+            <img
+              src={`http://localhost:5001/${venue.thumbnail}`}
+              alt={venue.name}
+              className="nearby-image"
+            />
+
+          ) : (
+
+            <div className="nearby-image-placeholder">
+              No Image
+            </div>
+
+          )}
+
+          <div className="nearby-content">
+
+            <h3>{venue.name}</h3>
+
+            <p>
+              {venue.category.replace("_", " ")}
+            </p>
+
+            <p>
+              📍 {venue.city}
+            </p>
+
+            <h4>
+              €
+              {Number(
+                venue.base_price
+              ).toLocaleString()}
+            </h4>
+
+            <Link
+              to={`/venues/${venue.id}`}
+              className="nearby-view-btn"
+            >
+              View Venue
+            </Link>
+
+          </div>
+
+        </div>
+
+      ))}
+
+    </div>
+
+  )}
+
+</div>
+
+        </div>
+      );
+    }
 
 export default VenueDetailsPage;
 

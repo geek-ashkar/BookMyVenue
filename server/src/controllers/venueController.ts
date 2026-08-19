@@ -1184,3 +1184,86 @@ export const deleteVenue = async (
       client.release();
     }
 };
+
+export const getNearbyVenues = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const venueId = Number(req.params.id);
+
+    if (Number.isNaN(venueId)) {
+      res.status(400).json({
+        message: "Invalid venue id.",
+      });
+      return;
+    }
+
+    // Get current venue city
+    const venueResult = await pool.query(
+      `
+      SELECT city
+      FROM venues
+      WHERE id = $1
+      `,
+      [venueId]
+    );
+
+    if (venueResult.rows.length === 0) {
+      res.status(404).json({
+        message: "Venue not found.",
+      });
+      return;
+    }
+
+    const city = venueResult.rows[0].city;
+
+    // Fetch nearby venues (same city)
+    const nearbyResult = await pool.query(
+      `
+      SELECT
+        v.id,
+        v.name,
+        v.category,
+        v.city,
+        v.base_price,
+
+        (
+          SELECT file_path
+          FROM venue_images
+          WHERE venue_id = v.id
+          LIMIT 1
+        ) AS thumbnail
+
+      FROM venues v
+
+      WHERE
+        v.city = $1
+      AND
+        v.id <> $2
+      AND
+        v.approval_status = 'approved'
+      AND
+        v.is_active = true
+
+      ORDER BY RANDOM()
+
+      LIMIT 4
+      `,
+      [city, venueId]
+    );
+
+    res.status(200).json({
+      nearbyVenues: nearbyResult.rows,
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to fetch nearby venues.",
+    });
+
+  }
+};

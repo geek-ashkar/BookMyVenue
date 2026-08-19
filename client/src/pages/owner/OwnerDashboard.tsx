@@ -126,17 +126,17 @@
               
 
              <div className ="venue-actions"> 
-                <button className="view-btn"
+                <button className="owner-view-btn"
                     onClick={() => navigate(`/owner/venues/${venue.id}`)}>
                     View
                 </button>
                   
-                <button className="edit-btn"
+                <button className="owner-edit-btn"
                     onClick={() => navigate(`/owner/venues/${venue.id}/edit`)}>
                     Edit
                 </button>
 
-                <button className="delete-btn" onClick={()=> handleDelete(venue.id)}>
+                <button className="owner-delete-btn" onClick={()=> handleDelete(venue.id)}>
                   -Delete
                 </button>
               </div>
