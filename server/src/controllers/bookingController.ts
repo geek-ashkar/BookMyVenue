@@ -304,6 +304,15 @@ export const getOwnerVenueBookings = async (
 
     const ownerId = req.user?.id;
 
+    const venueId = Number(req.params.venueId);
+
+    if (!venueId || Number.isNaN(venueId)) {
+        res.status(400).json({
+            message: "Valid venue id is required.",
+        });
+        return;
+    }
+
     if(!ownerId){
         res.status(401).json({
             message : "Unauthorized.Please login first",
@@ -344,10 +353,10 @@ export const getOwnerVenueBookings = async (
             JOIN venues v ON v.id = b.venue_id
             JOIN users u ON u.id = b.customer_id
             LEFT JOIN payments p ON p.booking_id = b.id
-            WHERE v.owner_id = $1
+            WHERE v.owner_id = $1 AND v.id = $2
             ORDER BY b.booking_date DESC, b.start_time DESC            
             `,
-            [ownerId]
+            [ownerId, venueId]
         );
         res.status(200).json({
             message : "Owner venue booking fetched successfully",

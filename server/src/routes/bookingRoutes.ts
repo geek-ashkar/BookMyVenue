@@ -17,7 +17,7 @@ router.post("/",authMiddleware, allowRoles("customer"), createBooking);
 
 router.get("/my-bookings", authMiddleware, allowRoles("customer"), getMyBookings);
 
-router.get("/owner/my-venue-bookings", authMiddleware, allowRoles("owner"), getOwnerVenueBookings);
+router.get("/owner/:venueId", authMiddleware,  allowRoles("owner"),  getOwnerVenueBookings);
 
 router.get("/admin/all", authMiddleware, allowRoles("root_admin"), getAllBookingsForAdmin);
 
