@@ -1,0 +1,110 @@
+.owner-bookings-container {
+  max-width: 1300px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.owner-bookings-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.booking-count {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 35px;
+  color: #eb0f0f;
+}
+
+.no-bookings {
+  text-align: center;
+  font-size: 20px;
+  color: #777;
+  margin-top: 60px;
+}
+
+.bookings-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0,0,0,.08);
+}
+
+.bookings-table thead {
+  background: #507fe7;
+  color: white;
+}
+
+.bookings-table th,
+.bookings-table td {
+  padding: 18px;
+  text-align: center;
+}
+
+.bookings-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.bookings-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.amount {
+  font-weight: bold;
+  color: #16a34a;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* Payment */
+
+.payment-success {
+  background: #dcfce7;
+  color: #e4b14c;
+}
+
+.payment-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.payment-failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.payment-refunded {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* Booking */
+
+.booking-confirmed {
+  background: #dcfce7;
+  color: #f65c02;
+}
+
+.booking-pending_payment {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.booking-cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.booking-failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
