@@ -63,6 +63,39 @@ if (selectedDate < today) {
   const client = await pool.connect();
 
   try {
+        const overlappingBooking = await client.query(
+      `
+        SELECT id
+        FROM bookings
+        WHERE venue_id = $1
+          AND booking_date = $2
+          AND booking_status IN (
+            'pending_payment',
+            'confirmed'
+          )
+          AND (
+            start_time < $4
+            AND
+            end_time > $3
+          )
+      `,
+      [
+        venue_id,
+        booking_date,
+        start_time,
+        end_time,
+      ]
+    );
+
+      if (overlappingBooking.rows.length > 0) {
+        res.status(400).json({
+          message:
+            "This venue is already booked for the selected date and time.",
+        });
+
+        return;
+      }
+
     await client.query("BEGIN");
 
     const expireResult = await client.query(
