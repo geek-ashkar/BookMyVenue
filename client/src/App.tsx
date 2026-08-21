@@ -26,6 +26,7 @@ import BookingSuccessPage from "./pages/customer/BookingSuccessPage";
 import MyBookingsPage from "./pages/customer/MyBookingsPage";
 import PaymentPage from "./pages/customer/PaymentPage";
 import OwnerBookingsPage from "./pages/owner/OwnerBookingsPage";
+import AddAdminPage from "./pages/admin/AddAdminPage";
 
 function App() {
   return (
@@ -235,6 +236,17 @@ function App() {
             <AdminVenueDetailsPage/>
             </ProtectedRoute>
           }
+        />
+
+        <Route
+          path="/admin/add-admin"
+          element={
+                <ProtectedRoute
+                    allowedRoles={["root_admin"]}
+                >
+                    <AddAdminPage />
+                </ProtectedRoute>
+            }
         />
 
         {/* Unknown Routes */}

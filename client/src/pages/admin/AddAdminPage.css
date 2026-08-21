@@ -1,0 +1,90 @@
+.add-admin-page{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:80vh;
+}
+
+.add-admin-card{
+
+    width:500px;
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:40px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
+
+.add-admin-card h1{
+
+    text-align:center;
+
+    margin-bottom:10px;
+}
+
+.add-admin-card p{
+
+    text-align:center;
+
+    color:#666;
+
+    margin-bottom:30px;
+}
+
+.add-admin-card form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+}
+
+.add-admin-card label{
+
+    font-weight:bold;
+}
+
+.add-admin-card input{
+
+    padding:14px;
+
+    font-size:16px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:8px;
+}
+
+.add-admin-card button{
+
+    margin-top:10px;
+
+    padding:15px;
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.add-admin-card button:hover{
+
+    background:#1d4ed8;
+}

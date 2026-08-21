@@ -250,7 +250,16 @@ function AdminDashboard() {
             ))}
           </tbody>
         </table>
-    </div>
+
+        <button
+            className="add-admin-btn"
+            onClick={() =>
+                navigate("/admin/add-admin")
+            }
+        >
+            + Add Admin
+        </button>
+        </div>
         
       
     </div>

@@ -7,6 +7,7 @@ import venueRoutes from "./routes/venueRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import path from "path";
 
 dotenv.config();
@@ -43,6 +44,7 @@ app.use("/venues", venueRoutes);
 app.use("/bookings", bookingRoutes);
 app.use("/payments", paymentRoutes);
 app.use("/dashboard", dashboardRoutes);
+app.use("/admin", adminRoutes);
 
 const PORT = process.env.PORT || 5000;
 

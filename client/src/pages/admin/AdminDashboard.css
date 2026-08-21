@@ -46,6 +46,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .table-header {
@@ -95,4 +96,25 @@
 
 .recent-bookings{
     margin-top:40px;
+}
+
+.add-admin-btn{
+
+    background:#16a34a;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:14px 30px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    margin-left:20px;
 }
