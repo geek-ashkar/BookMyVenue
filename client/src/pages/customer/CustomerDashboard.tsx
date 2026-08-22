@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import VenueCard from "./VenueCard";
 import "./CustomerDashboard.css";
@@ -25,6 +26,8 @@ function CustomerDashboard() {
   const [priceRange, setPriceRange] = useState("");
   const [capacityRange, setCapacityRange] = useState("");
   const { user } = useAuth();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchVenues = async () => {
@@ -87,17 +90,24 @@ const cities = [...new Set(venues.map((venue) => venue.city))];
 
   return (
     <div style={{ padding: "20px" }}>
-      <div className="dashboard-header">
+     <div className="dashboard-top">
 
-    <h1>
-        Welcome back, {user?.name} 👋
-    </h1>
+  <div className="dashboard-header">
 
-    <p>
-        Find the perfect venue for your next event.
-    </p>
+    <h1>Welcome back, {user?.name} 👋</h1>
 
-</div>
+    <p>Find the perfect venue for your next event.</p>
+
+  </div>
+
+  <button
+    className="my-bookings-btn"
+    onClick={() => navigate("/customer/my-bookings")}
+  >
+    📅 My Bookings
+  </button>
+
+  </div>  
     
       <div className="filter-bar">
 

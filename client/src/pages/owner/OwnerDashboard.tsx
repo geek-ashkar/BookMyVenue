@@ -247,6 +247,7 @@ function OwnerDashboard() {
                 "guestCapacity",
               ]);
               const price = getVenueValue(venueData, [
+                "base_price",
                 "price",
                 "pricePerHour",
                 "price_per_hour",
@@ -255,6 +256,7 @@ function OwnerDashboard() {
               const status = getVenueValue(venueData, [
                 "status",
                 "approvalStatus",
+                "status",
               ]).toLowerCase() || "pending";
 
               return (
@@ -333,7 +335,7 @@ function OwnerDashboard() {
                       <button
                         className="card-action"
                         onClick={() =>
-                          navigate(`/owner/edit-venue/${venue.id}`)
+                          navigate(`/owner/venues/${venue.id}/edit`)
                         }
                       >
                         Edit

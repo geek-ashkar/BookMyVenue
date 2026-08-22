@@ -88,3 +88,49 @@
     max-width:1400px;
     margin:50px auto 0;
 }
+
+.my-bookings-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.my-bookings-btn:hover {
+  background: #1d4ed8;
+}
+.dashboard-top{
+    max-width:1400px;
+    margin:30px auto 40px;
+    position:relative;
+}
+
+.dashboard-header{
+    text-align:center;
+}
+
+.my-bookings-btn{
+    position:absolute;
+    top:0;
+    right:0;
+
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.my-bookings-btn:hover{
+    background:#1d4ed8;
+}
