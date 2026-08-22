@@ -5,6 +5,7 @@ import "./OwnerBookingsPage.css";
 
 type Booking = {
   booking_id: number;
+  venue_name : string;
   customer_name: string;
   customer_email: string;
   booking_date: string;
@@ -67,6 +68,7 @@ function OwnerBookingsPage() {
           <thead>
             <tr>
               <th>Customer</th>
+              <th>Venue</th>
               <th>Email</th>
               <th>Date</th>
               <th>Time</th>
@@ -83,6 +85,8 @@ function OwnerBookingsPage() {
               <tr key={booking.booking_id}>
 
                 <td>{booking.customer_name}</td>
+
+                <td>{booking.venue_name}</td>
 
                 <td>{booking.customer_email}</td>
 
