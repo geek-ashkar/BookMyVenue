@@ -372,6 +372,79 @@ export const getOwnerVenueBookings = async (
     }
 };
 
+export const getOwnerBookings = async (
+    req: AuthRequest,
+    res: Response
+): Promise<void> => {
+
+    const ownerId = req.user?.id;
+
+    if (!ownerId) {
+        res.status(401).json({
+            message: "Unauthorized. Please login first."
+        });
+        return;
+    }
+
+    try {
+
+        const result = await pool.query(
+            `
+            SELECT
+                b.id AS booking_id,
+                b.booking_date,
+                b.start_time,
+                b.end_time,
+                b.total_amount,
+                b.booking_status,
+                b.created_at,
+
+                v.id AS venue_id,
+                v.name AS venue_name,
+
+                u.name AS customer_name,
+                u.email AS customer_email,
+
+                p.payment_status
+
+            FROM bookings b
+
+            JOIN venues v
+                ON v.id = b.venue_id
+
+            JOIN users u
+                ON u.id = b.customer_id
+
+            LEFT JOIN payments p
+                ON p.booking_id = b.id
+
+            WHERE v.owner_id = $1
+
+            ORDER BY
+                b.booking_date DESC,
+                b.start_time DESC
+            `,
+            [ownerId]
+        );
+
+        res.status(200).json({
+            message: "Owner bookings fetched successfully.",
+            count: result.rows.length,
+            bookings: result.rows
+        });
+
+    } catch (error) {
+
+        console.error("Owner bookings error:", error);
+
+        res.status(500).json({
+            message: "Something went wrong while fetching bookings."
+        });
+
+    }
+};
+
+
 export const cancelMyBooking = async (
     req : AuthRequest,
     res : Response

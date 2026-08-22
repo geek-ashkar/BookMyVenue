@@ -21,10 +21,14 @@ function OwnerBookingsPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const url = venueId
+  ? `/bookings/owner/${venueId}`
+  : "/bookings/owner/my-venue-bookings";
+
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await api.get(`/bookings/owner/${venueId}`);
+        const response = await api.get(url);
 
         setBookings(response.data.bookings);
       } catch (error) {

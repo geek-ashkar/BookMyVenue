@@ -60,6 +60,13 @@ function OwnerDashboard() {
       try {
         const response = await api.get("/venues/my-venues");
         setVenues(response.data.venues ?? []);
+
+        const summaryResponse = await api.get(
+          "/owner/dashboard-summary"
+        );
+
+        setSummary(summaryResponse.data.summary);
+
       } catch (fetchError) {
         console.error(fetchError);
         setError("Failed to load venues. Please try again.");
@@ -70,6 +77,18 @@ function OwnerDashboard() {
 
     fetchMyVenues();
   }, []);
+
+  type DashboardSummary = {
+    total_venues: number;
+    total_bookings: number;
+    total_revenue: string;
+    pending_bookings: number;
+    confirmed_bookings: number;
+    cancelled_bookings: number; 
+  };
+
+  const [summary, setSummary] =
+  useState<DashboardSummary | null>(null);  
 
   const handleDelete = async (venueId: number) => {
     const confirmed = window.confirm(
@@ -115,6 +134,9 @@ function OwnerDashboard() {
 
   return (
     <main className="owner-dashboard">
+
+
+
       <section className="owner-dashboard__header">
         <div>
           <p className="owner-dashboard__eyebrow">Venue management</p>
@@ -132,6 +154,50 @@ function OwnerDashboard() {
           Add Venue
         </button>
       </section>
+
+      {summary && (
+
+        <div className="dashboard-summary">
+
+          <div className="summary-card">
+            <h3>🏛 My Venues</h3>
+            <h2>{summary.total_venues}</h2>
+          </div>
+
+          <div
+            className="summary-card clickable"
+            onClick={() => navigate("/owner/bookings")}
+          >
+            <h3>📅 Bookings</h3>
+            <h2>{summary.total_bookings}</h2>
+          </div>
+
+          <div className="summary-card">
+            <h3>💶 Revenue</h3>
+            <h2>
+              €
+              {Number(summary.total_revenue).toLocaleString()}
+            </h2>
+          </div>
+
+          <div className="summary-card">
+            <h3>⏳ Pending</h3>
+            <h2>{summary.pending_bookings}</h2>
+          </div>
+
+          <div className="summary-card">
+            <h3>✅ Confirmed</h3>
+            <h2>{summary.confirmed_bookings}</h2>
+          </div>
+
+          <div className="summary-card">
+            <h3>❌ Cancelled</h3>
+            <h2>{summary.cancelled_bookings}</h2>
+          </div>
+
+        </div>
+
+        )}
 
       <section className="owner-dashboard__content">
         <div className="section-heading">

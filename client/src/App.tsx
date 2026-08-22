@@ -148,6 +148,15 @@ function App() {
             }
           />
 
+          <Route
+            path="/owner/bookings"
+            element={
+                <ProtectedRoute allowedRoles={["owner"]}>
+                    <OwnerBookingsPage />
+                </ProtectedRoute>
+            }
+          />
+
           {/* Root Admin Dashboard */}
         <Route
           path="/admin/dashboard"
