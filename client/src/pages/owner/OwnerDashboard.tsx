@@ -255,6 +255,7 @@ function OwnerDashboard() {
               ]);
               const status = getVenueValue(venueData, [
                 "status",
+                "approval_status",
                 "approvalStatus",
                 "status",
               ]).toLowerCase() || "pending";
@@ -282,6 +283,7 @@ function OwnerDashboard() {
                         <p>No image available</p>
                       </div>
                     )}
+
 
                     <span className={`status-badge status-badge--${status}`}>
                       {statusLabels[status] ?? status}
@@ -318,7 +320,7 @@ function OwnerDashboard() {
                     <div className="owner-venue-card__actions">
                       <button
                         className="card-action card-action--primary"
-                        onClick={() => navigate(`/venues/${venue.id}`)}
+                        onClick={() => navigate(`/owner/venues/${venue.id}`)}
                       >
                         View
                       </button>
