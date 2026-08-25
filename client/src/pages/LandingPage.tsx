@@ -1,0 +1,274 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import api from "../services/api";
+import "./LandingPage.css";
+import heroImage from "../assets/hero.png";
+
+import {
+  FaBuilding,
+  FaGlassCheers,
+  FaUsers,
+  FaCoffee,
+  FaCity,
+  FaMicrophone,
+  FaCamera,
+  FaTree,
+  FaUmbrellaBeach,
+} from "react-icons/fa";
+
+const categories = [
+  {
+    title: "Banquet Hall",
+    value: "banquet_hall",
+    icon: <FaGlassCheers />,
+    description: "Perfect for weddings and celebrations.",
+  },
+  {
+    title: "Conference Hall",
+    value: "conference_hall",
+    icon: <FaBuilding />,
+    description: "Professional spaces for conferences and seminars.",
+  },
+  {
+    title: "Meeting Hall",
+    value: "meeting_hall",
+    icon: <FaUsers />,
+    description: "Ideal for meetings and business discussions.",
+  },
+  {
+    title: "Auditorium",
+    value: "auditorium",
+    icon: <FaMicrophone />,
+    description: "Large venues for performances and events.",
+  },
+  {
+    title: "Studio",
+    value: "studio",
+    icon: <FaCamera />,
+    description: "Photography and creative production spaces.",
+  },
+  {
+    title: "Cafe Space",
+    value: "cafe_space",
+    icon: <FaCoffee />,
+    description: "Cozy cafés for private gatherings.",
+  },
+  {
+    title: "Rooftop",
+    value: "rooftop",
+    icon: <FaCity />,
+    description: "Beautiful rooftop venues with city views.",
+  },
+  {
+    title: "Open Space",
+    value: "open_space",
+    icon: <FaTree />,
+    description: "Spacious open venues for every occasion.",
+  },
+  {
+    title: "Outdoor Event Space",
+    value: "outdoor_event_space",
+    icon: <FaUmbrellaBeach />,
+    description: "Perfect outdoor venues for memorable events.",
+  },
+];
+
+type Venue = {
+  id: number;
+  name: string;
+  city: string;
+  category: string;
+  capacity: number;
+  base_price: string;
+  thumbnail: string | null;
+};
+
+
+
+function LandingPage() {
+  const navigate = useNavigate();
+  const [featuredVenues, setFeaturedVenues] = useState<Venue[]>([]);
+
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+
+  const fetchFeaturedVenues = async () => {
+
+    try {
+            const response = await api.get("/venues/featured");
+console.log(response.data.venues);
+
+            setFeaturedVenues(response.data.venues);
+            } catch (error) {
+            console.error(error);
+            }
+        };
+        fetchFeaturedVenues();
+
+        }, []);
+
+  return (
+    <>
+      {/* Navbar */}
+
+      <header className="landing-navbar">
+
+        <div className="logo">
+          <h2>BookMyVenue</h2>
+        </div>
+
+        <nav>
+          <a href="/">Home</a>
+          <a href="#venues">Venues</a>
+          <a href="#categories">Categories</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div className="nav-buttons">
+
+          <button
+            className="host-btn"
+            onClick={() => navigate("/register/owner")}
+          >
+            Register My Venue
+          </button>
+
+          <button
+            className="login-btn"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </button>
+
+        </div>
+
+      </header>
+
+      {/* Hero */}
+
+      <section
+        className="hero-section"
+        style={{
+          backgroundImage: `url(${heroImage})`,
+        }}
+      >
+        <div className="hero-overlay">
+
+          <h1>
+            Find the Perfect Venue
+            
+          </h1>
+
+          <p>
+            Discover banquet halls, conference rooms, studios,
+             cafés and outdoor venues.
+          </p>
+
+          <div className="hero-search">
+
+            <input
+              type="text"
+              placeholder="Search venues, cities or categories..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+
+            <button>
+              Search
+            </button>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* Categories */}
+
+      <section
+        id="categories"
+        className="categories-section"
+      >
+
+        <h2>Browse by Categories</h2>
+
+        <p>
+          Find the perfect venue for every occasion
+        </p>
+
+        <div className="categories-grid">
+
+          {categories.map((category) => (
+
+            <div
+              key={category.value}
+              className="category-card"
+            >
+
+              <div className="category-icon">
+                {category.icon}
+              </div>
+
+              <h3>{category.title}</h3>
+
+              <p>{category.description}</p>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </section>
+
+      <section  id="venues"
+            className="featured-section"
+        >
+            <h1>Featured Venues</h1>
+            <p>
+                Explore our most popular event spaces.
+            </p>
+            <div className="featured-grid">
+                {featuredVenues.map((venue) => (
+                    <div
+                        key={venue.id}
+                        className="featured-card"
+                    >
+                       <img
+                            src={`http://localhost:5001/${venue.thumbnail}`}
+                            alt={venue.name}
+                            onError={(e) => {
+                                console.log("Image failed:", e.currentTarget.src);
+                            }}
+                        />
+
+                        <div className="featured-body">
+
+                            <h3>{venue.name}</h3>
+
+                            <p>📍 {venue.city}</p>
+
+                            <p>{venue.category.replaceAll("_", " ")}</p>
+
+                            <p>👥 {venue.capacity} Guests</p>
+
+                            <h4>
+                                €{Number(venue.base_price).toLocaleString()}
+                            </h4>
+
+                            <button>
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+    </>
+  );
+}
+
+export default LandingPage;

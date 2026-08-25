@@ -13,6 +13,7 @@ import {
   updateVenue,
   deleteVenue,
   getNearbyVenues,
+  getFeaturedVenues,
 } from "../controllers/venueController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { allowRoles } from "../middleware/roleMiddleware.js";
@@ -43,6 +44,8 @@ router.patch("/admin/:id/reject", authMiddleware,  allowRoles("root_admin"), rej
 router.get("/", getApprovedVenues);
 
 router.get("/:id/nearby", getNearbyVenues);
+
+router.get("/featured", getFeaturedVenues);
 
 router.get("/:id", getPublicVenueDetails);
 

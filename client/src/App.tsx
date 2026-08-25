@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
@@ -33,7 +34,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Redirect Home */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<LandingPage/>} />
 
         {/* Authentication */}
         <Route path="/login" element={<LoginPage />} />
@@ -261,7 +262,7 @@ function App() {
         {/* Unknown Routes */}
         <Route
           path="*"
-          element={<Navigate to="/login" replace />}
+          element={< Navigate to="/" replace/>}
         />
       </Routes>
     </BrowserRouter>

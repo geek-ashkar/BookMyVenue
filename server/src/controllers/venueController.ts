@@ -1267,3 +1267,45 @@ export const getNearbyVenues = async (
 
   }
 };
+
+export const getFeaturedVenues = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const result = await pool.query(`
+      SELECT
+          v.id,
+          v.name,
+          v.city,
+          v.category,
+          v.capacity,
+          v.base_price,
+
+          (
+              SELECT file_path
+              FROM venue_images
+              WHERE venue_id = v.id
+              ORDER BY id
+              LIMIT 1
+          ) AS thumbnail
+
+      FROM venues v
+      WHERE v.approval_status='approved'
+      AND v.is_active=true
+      ORDER BY v.created_at DESC
+      LIMIT 6;
+    `);
+console.log(result.rows);
+    res.status(200).json({
+      venues: result.rows,
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to fetch featured venues.",
+    });
+  }
+};
