@@ -15,6 +15,13 @@ import {
   FaCamera,
   FaTree,
   FaUmbrellaBeach,
+  FaCheckCircle,
+  FaShieldAlt,
+  FaBolt,
+  FaHeadset,
+  FaMapMarkerAlt,
+  FaCalendarCheck,
+  FaStar,
 } from "react-icons/fa";
 
 const categories = [
@@ -84,7 +91,55 @@ type Venue = {
   thumbnail: string | null;
 };
 
+const features = [
+  {
+    icon: <FaCheckCircle />,
+    title: "Verified Venues",
+    description:
+      "100% verified event spaces.",
+  },
+  {
+    icon: <FaShieldAlt />,
+    title: "Secure Booking",
+    description:
+      "Safe and secure reservations.",
+  },
+  {
+    icon: <FaBolt />,
+    title: "Instant Booking",
+    description:
+      "Book your venue in minutes.",
+  },
+  {
+    icon: <FaHeadset />,
+    title: "24/7 Support",
+    description:
+      "We're here whenever you need us.",
+  },
+];
 
+const statistics = [
+  {
+    number: "500+",
+    title: "Venues",
+    icon: <FaBuilding />,
+  },
+  {
+    number: "20+",
+    title: "Cities",
+    icon: <FaMapMarkerAlt />,
+  },
+  {
+    number: "10K+",
+    title: "Bookings",
+    icon: <FaCalendarCheck />,
+  },
+  {
+    number: "98%",
+    title: "Customer Satisfaction",
+    icon: <FaStar />,
+  },
+];
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -266,6 +321,74 @@ console.log(response.data.venues);
                 ))}
             </div>
         </section>
+
+        <section className="features-section">
+
+            <h2>Why Choose BookMyVenue?</h2>
+
+            <p>
+                Everything you need to find and book the perfect venue with confidence.
+            </p>
+
+            <div className="features-grid">
+
+                {features.map((feature) => (
+
+                    <div
+                        className="feature-card"
+                        key={feature.title}
+                    >
+
+                        <div className="feature-icon">
+                            {feature.icon}
+                        </div>
+
+                        <h3>{feature.title}</h3>
+
+                        <p>{feature.description}</p>
+
+                    </div>
+
+                ))}
+
+            </div>
+
+        </section>
+
+        <section className="stats-section">
+
+            <h2>Trusted by Thousands</h2>
+
+            <p>
+                Thousands of customers trust BookMyVenue to find the perfect event space.
+            </p>
+
+            <div className="stats-grid">
+
+                {statistics.map((stat) => (
+
+                    <div
+                        key={stat.title}
+                        className="stat-card"
+                    >
+
+                        <div className="stat-icon">
+                            {stat.icon}
+                        </div>
+
+                        <h3>{stat.number}</h3>
+
+                        <p>{stat.title}</p>
+
+                    </div>
+
+                ))}
+
+            </div>
+
+        </section>
+
+        
 
     </>
   );
