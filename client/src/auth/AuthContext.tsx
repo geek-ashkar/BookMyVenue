@@ -26,20 +26,30 @@ type AuthProviderProps = {
 };
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+ const [user, setUser] = useState<User | null>(() => {
+  const savedUser = localStorage.getItem("user");
+  return savedUser ? JSON.parse(savedUser) : null;
+});
 
-  function login(user: User, token: string) {
-    setUser(user);
-    setToken(token);
-    localStorage.setItem("token", token);
-  }
+const [token, setToken] = useState<string | null>(() => {
+  return localStorage.getItem("token");
+});
 
-  function logout() {
-    setUser(null);
-    setToken(null);
-    localStorage.removeItem("token");
-  }
+function login(user: User, token: string) {
+  setUser(user);
+  setToken(token);
+
+  localStorage.setItem("token", token);
+  localStorage.setItem("user", JSON.stringify(user));
+}
+
+function logout() {
+  setUser(null);
+  setToken(null);
+
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+}
 
   return (
     <AuthContext.Provider

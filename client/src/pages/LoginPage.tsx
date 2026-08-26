@@ -20,9 +20,7 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
       password,
     });
 
-    console.log("Login Response:", response.data);
-
-    login(response.data.token, response.data.user);
+    login(response.data.user, response.data.token);
 
     const role = response.data.user.role;
     if (role === "customer") {

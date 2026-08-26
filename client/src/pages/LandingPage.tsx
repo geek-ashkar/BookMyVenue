@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import api from "../services/api";
 import "./LandingPage.css";
 import heroImage from "../assets/hero.png";
@@ -22,7 +22,16 @@ import {
   FaMapMarkerAlt,
   FaCalendarCheck,
   FaStar,
+  FaPhoneAlt,
 } from "react-icons/fa";
+
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaXTwitter,
+  FaEnvelope,
+} from "react-icons/fa6";
 
 const categories = [
   {
@@ -225,14 +234,31 @@ console.log(response.data.venues);
           <div className="hero-search">
 
             <input
-              type="text"
-              placeholder="Search venues, cities or categories..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+                type="text"
+                placeholder="Search venues, cities or categories..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                    if (search.trim()) {
+                        navigate(`/venues?search=${encodeURIComponent(search.trim())}`);
+                    } else {
+                        navigate("/venues");
+                    }
+                    }
+                }}
             />
 
-            <button>
-              Search
+            <button
+                onClick={() => {
+                    if (search.trim()) {
+                    navigate(`/venues?search=${encodeURIComponent(search.trim())}`);
+                    } else {
+                    navigate("/venues");
+                    }
+                }}
+                >
+                Search
             </button>
 
           </div>
@@ -257,11 +283,10 @@ console.log(response.data.venues);
 
           {categories.map((category) => (
 
-            <div
-              key={category.value}
-              className="category-card"
-            >
-
+            <div key={category.value}
+                className="category-card"
+                onClick={() =>
+                    navigate(`/venues?category=${category.value}`)}>
               <div className="category-icon">
                 {category.icon}
               </div>
@@ -313,9 +338,10 @@ console.log(response.data.venues);
                                 €{Number(venue.base_price).toLocaleString()}
                             </h4>
 
-                            <button>
-                                View Details
-                            </button>
+                            <button
+                                    onClick={() => navigate(`/venues/${venue.id}`)} >
+                                    View Details
+                                </button>
                         </div>
                     </div>
                 ))}
@@ -387,6 +413,98 @@ console.log(response.data.venues);
             </div>
 
         </section>
+
+            <footer
+                id="contact"
+                className="footer">
+
+                <div className="footer-container">
+
+                    <div className="footer-about">
+
+                        <h2>BookMyVenue</h2>
+
+                        <p>
+                            Find and book the perfect venue for weddings,
+                            conferences, meetings and memorable events.
+                        </p>
+
+                        <div className="social-icons">
+
+                            <a href="#">
+                                <FaFacebookF />
+                            </a>
+
+                            <a href="#">
+                                <FaInstagram />
+                            </a>
+
+                            <a href="#">
+                                <FaLinkedinIn />
+                            </a>
+
+                            <a href="#">
+                                <FaXTwitter />
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div className="footer-links">
+
+                        <h3>Quick Links</h3>
+
+                        <Link to="/">Home</Link>
+                        <Link to="/venues">Venues</Link>
+                        <a href="#categories">Categories</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+
+                    </div>
+
+                    <div className="footer-links">
+
+                        <h3>Categories</h3>
+
+                        <a href="#">Banquet Hall</a>
+                        <a href="#">Conference Hall</a>
+                        <a href="#">Meeting Hall</a>
+                        <a href="#">Auditorium</a>
+                        <a href="#">Outdoor Space</a>
+
+                    </div>
+
+                    <div className="footer-contact">
+
+                        <h3>Contact</h3>
+
+                        <p>
+                            <FaEnvelope />
+                            support@bookmyvenue.com
+                        </p>
+
+                        <p>
+                            <FaPhoneAlt />
+                            +49 123 456 789
+                        </p>
+
+                        <p>
+                            <FaMapMarkerAlt />
+                            Berlin, Germany
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div className="footer-bottom">
+
+                    © 2026 BookMyVenue. All Rights Reserved.
+
+                </div>
+
+            </footer>
 
         
 

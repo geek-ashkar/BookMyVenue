@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import "./VenueDetailsPage.css";
 import { useNavigate, Link} from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 type Venue ={
     id : number;
@@ -41,6 +42,8 @@ function VenueDetailsPage () {
  const [error, setError] = useState("");
  const navigate = useNavigate();
  const [nearbyVenues, setNearbyVenues] = useState<NearbyVenue[]>([]);
+ const { user, token } = useAuth();
+
 
     useEffect (() => {
             const fetchVenue = async () =>{
@@ -82,10 +85,10 @@ function VenueDetailsPage () {
 
     <div className="hero-image">
       {venue.thumbnail ? (
-        <img
+       <img
           src={`http://localhost:5001/${venue.thumbnail}`}
           alt={venue.name}
-        />
+      />
       ) : (
         <div className="no-image">
           No Image Available
@@ -164,10 +167,24 @@ function VenueDetailsPage () {
       </div>
 
       <button
-        className="book-btn"
-        onClick={() => navigate(`/bookings/new/${venue.id}`)} >
-         Book Now
-      </button>
+          className="book-btn"
+          onClick={() => {
+
+            if (!token) {
+              navigate("/login");
+              return;
+            }
+
+            if (user?.role !== "customer") {
+              alert("Only customers can book venues.");
+              return;
+            }
+
+            navigate(`/bookings/new/${venue.id}`);
+          }}
+          >
+          Book Now
+        </button>
 
       </div>
 

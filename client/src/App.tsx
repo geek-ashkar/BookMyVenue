@@ -61,11 +61,7 @@ function App() {
 
         <Route
           path="/venues/:id"
-          element={
-          <ProtectedRoute allowedRoles={["customer"]}>
-            <CustomerVenueDetailsPage />
-           </ProtectedRoute>
-          }
+          element={<CustomerVenueDetailsPage />}
         />
 
         <Route
