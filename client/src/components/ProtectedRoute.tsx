@@ -11,18 +11,24 @@ function ProtectedRoute({
   children,
   allowedRoles,
 }: ProtectedRouteProps) {
-  const { user, token , loading } = useAuth();
+  const { user, token, loading } = useAuth();
 
-  if (loading) {
-  return <h2>Loading...</h2>;
-}
+console.log("ProtectedRoute");
+console.log("token:", token);
+console.log("user:", user);
+console.log("allowedRoles:", allowedRoles);
 
-  // User is not logged in
+console.log({
+  loading,
+  token,
+  user,
+  allowedRoles,
+});
+
   if (!token || !user) {
     return <Navigate to="/login" replace />;
   }
 
-  // User is logged in but doesn't have permission
   if (!allowedRoles.includes(user.role)) {
     switch (user.role) {
       case "customer":
@@ -39,7 +45,6 @@ function ProtectedRoute({
     }
   }
 
-  // User is authorized
   return children;
 }
 

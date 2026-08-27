@@ -44,6 +44,7 @@ function login(user: User, token: string) {
 }
 
 function logout() {
+  
   setUser(null);
   setToken(null);
 

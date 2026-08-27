@@ -60,6 +60,11 @@ function App() {
         />
 
         <Route
+          path="/venues"
+          element={<CustomerDashboard />}
+        />
+
+        <Route
           path="/venues/:id"
           element={<CustomerVenueDetailsPage />}
         />

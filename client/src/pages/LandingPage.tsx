@@ -162,7 +162,6 @@ function LandingPage() {
 
     try {
             const response = await api.get("/venues/featured");
-console.log(response.data.venues);
 
             setFeaturedVenues(response.data.venues);
             } catch (error) {
@@ -185,7 +184,7 @@ console.log(response.data.venues);
 
         <nav>
           <a href="/">Home</a>
-          <a href="#venues">Venues</a>
+          <Link to="/venues">Venues</Link>
           <a href="#categories">Categories</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>

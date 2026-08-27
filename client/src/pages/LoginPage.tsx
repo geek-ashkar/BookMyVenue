@@ -20,11 +20,19 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
       password,
     });
 
-    login(response.data.user, response.data.token);
+
+console.log("Response:", response.data);
+    login(response.data.token, response.data.user);
+console.log(localStorage.getItem("user"));
+console.log("User saved");
+
+navigate("/customer/dashboard");
 
     const role = response.data.user.role;
+
     if (role === "customer") {
         navigate("/customer/dashboard");
+        console.log(window.location.pathname);
     }
     else if (role === "owner") {
         navigate("/owner/dashboard");
