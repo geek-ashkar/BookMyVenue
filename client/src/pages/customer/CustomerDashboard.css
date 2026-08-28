@@ -1,136 +1,44 @@
-.filter-bar{
-    max-width:1000px;
-    margin:45px auto;
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
-
-.filter-row{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-.search-input{
-    width:420px;
-    height:42px;
-    padding:0 16px;
-    border:1px solid #d1d5db;
-    border-radius:10px;
-    font-size:15px;
-}
-
-.category-filter{
-    width:280px;
-    height:42px;
-    padding:0 14px;
-    border-radius:10px;
-}
-
-.city-filter,
-.price-filter,
-.capacity-filter{
-    width:220px;
-    height:42px;
-    padding:0 14px;
-    border-radius:10px;
-}
-
-.search-input,
-.category-filter,
-.city-filter,
-.price-filter,
-.capacity-filter{
-    border:1px solid #d1d5db;
-    background:rgb(244, 244, 243);
-    font-size:15px;
-    transition:.2s;
-}
-
-.search-input:focus,
-.category-filter:focus,
-.city-filter:focus,
-.price-filter:focus,
-.capacity-filter:focus{
-    outline:none;
-    border-color:#f4f4f6;
-    box-shadow:0 0 0 3px rgba(37,99,235,.15);
-}
-
-.dashboard-header{
-
-    text-align:center;
-
-    margin:30px 0 45px;
-}
-
-.dashboard-header h1{
-
-    font-size:54px;
-    font-weight:700;
-    color:#111827;
-    margin-bottom:30px;
-    
-}
-
-.dashboard-header p{
-    font-size:20px;
-    color:#6b7280;
-    margin:0;
-}
 .venues-grid{
+
+    max-width:1500px;
+
+    margin:40px auto;
+
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
-    gap:48px;
-    margin-top:50px;
-    max-width:1400px;
-    margin:50px auto 0;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:28px;
+
+    align-items:start;
 }
 
-.my-bookings-btn {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 20px;
-  transition: 0.3s;
+@media(max-width:1400px){
+
+    .venues-grid{
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
 }
 
-.my-bookings-btn:hover {
-  background: #1d4ed8;
-}
-.dashboard-top{
-    max-width:1400px;
-    margin:30px auto 40px;
-    position:relative;
-}
+@media(max-width:1000px){
 
-.dashboard-header{
-    text-align:center;
+    .venues-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
 }
 
-.my-bookings-btn{
-    position:absolute;
-    top:0;
-    right:0;
+@media(max-width:700px){
 
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:12px 24px;
-    border-radius:10px;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.25s;
-}
+    .venues-grid{
 
-.my-bookings-btn:hover{
-    background:#1d4ed8;
+        grid-template-columns:1fr;
+
+    }
+
 }

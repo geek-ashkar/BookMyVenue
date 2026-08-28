@@ -21,61 +21,60 @@ function VenueCard({ venue }: VenueCardProps) {
   return (
     <div className="venue-card">
 
-    <div className="venue-image">
-
+      <div className="venue-image">
         {venue.thumbnail ? (
-            <img
-                src={`http://localhost:5001/${venue.thumbnail}`}
-                alt={venue.name}
-                className="venue-thumbnail"
-            />
+          <img
+            src={`http://localhost:5001/${venue.thumbnail}`}
+            alt={venue.name}
+            className="venue-thumbnail"
+          />
         ) : (
-            <div className="no-image">
-                No Image Available
-            </div>
+          <div className="no-image">
+            No Image Available
+          </div>
         )}
+      </div>
 
-    </div>
-
-    <div className="venue-info">
+      <div className="venue-content">
 
         <h2 className="venue-name">
-            {venue.name}
+          {venue.name}
         </h2>
 
-        <p className="venue-category">
-            {venue.category
-                .split("_")
-                .map(
-                    (word) =>
-                        word.charAt(0).toUpperCase() +
-                        word.slice(1)
-                )
-                .join(" ")}
-        </p>
-
         <p className="venue-city">
-            📍 {venue.city}
+          📍 {venue.city}
         </p>
 
-        <p className="venue-capacity">
-            👥 {venue.capacity} People
+        <p className="venue-category">
+          {venue.category.replaceAll("_", " ")}
         </p>
 
-        <div className="venue-price">
-            € {Number(venue.base_price).toLocaleString()}
+        <hr />
+
+        <div className="venue-bottom">
+
+          <div>
+            <h3>{venue.capacity}</h3>
+            <span>Guests</span>
+          </div>
+
+          <div className="venue-price">
+            €
+            {Number(venue.base_price).toLocaleString()}
+          </div>
+
         </div>
 
         <button
-            className="view-btn"
-            onClick={() => navigate(`/venues/${venue.id}`)}
+          className="view-btn"
+          onClick={() => navigate(`/venues/${venue.id}`)}
         >
-            View Venue
+          View Details
         </button>
 
-    </div>
+      </div>
 
-</div>
+    </div>
   );
 }
 

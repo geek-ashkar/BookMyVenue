@@ -1,182 +1,165 @@
-/* ===========================
-   Venue Card
-=========================== */
-
 .venue-card{
-    width:100%;
-    max-width:340px;
-    min-height: 650px;
+    background:#fff;
 
-    background:#ffffff;
-
-    border-radius:18px;
+    border-radius:16px;
 
     overflow:hidden;
 
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+
+    transition:.25s;
+
     display:flex;
+
     flex-direction:column;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-
-    transition:all .25s ease;
 }
 
 .venue-card:hover{
     transform:translateY(-6px);
-    box-shadow:0 16px 35px rgba(0,0,0,.15);
+
+    box-shadow:0 16px 40px rgba(0,0,0,.15);
 }
 
-
-/* ===========================
-   Image
-=========================== */
-
 .venue-image{
+
     width:100%;
-    height:240px;
+
+    height:220px;
+
     overflow:hidden;
 }
 
 .venue-thumbnail{
+
     width:100%;
+
     height:100%;
 
     object-fit:cover;
-
-    transition:transform .3s ease;
-}
-
-.venue-card:hover .venue-thumbnail{
-    transform:scale(1.05);
 }
 
 .no-image{
+
     width:100%;
+
     height:100%;
 
     display:flex;
-    justify-content:center;
+
     align-items:center;
+
+    justify-content:center;
 
     background:#f3f4f6;
 
     color:#6b7280;
-
-    font-size:16px;
 }
 
+.venue-content{
 
-/* ===========================
-   Content
-=========================== */
-
-.venue-info{
-
-    flex:1;
+    padding:22px;
 
     display:flex;
+
     flex-direction:column;
 
-    align-items:center;
-    text-align:center;
-
-    padding:24px;
-    gap: 12px;
+    flex:1;
 }
 
-
-/* ===========================
-   Venue Name
-=========================== */
-
 .venue-name{
+
     margin:0;
 
     font-size:30px;
-    font-weight:700;
 
     color:#111827;
-
-    text-align:center;
-
-    line-height:1.2;
-
-    min-height:72px;
 }
 
+.venue-city{
 
-/* ===========================
-   Category
-=========================== */
+    margin-top:12px;
+
+    color:#6b7280;
+
+    font-size:18px;
+}
 
 .venue-category{
 
-    margin-top:12px;
-
-    font-size:20px;
+    margin-top:8px;
 
     color:#6b7280;
 
-    font-weight:500;
+    font-size:17px;
+
+    text-transform:capitalize;
 }
 
+.venue-content hr{
 
-.venue-city,
-.venue-capacity{
-    margin-top:12px;
+    margin:20px 0;
 
-    font-size:18px;
+    border:none;
+
+    border-top:1px solid #e5e7eb;
+}
+
+.venue-bottom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.venue-bottom h3{
+
+    margin:0;
+
+    font-size:28px;
+}
+
+.venue-bottom span{
+
     color:#6b7280;
-
-    white-space: nowrap;
 }
-
-
-/* ===========================
-   Price
-=========================== */
 
 .venue-price{
-    margin-top:24px;
 
-    font-size:42px;
-    font-weight:700;
+    font-size:34px;
+
+    font-weight:bold;
+
     color:#16a34a;
-
-    white-space: nowrap;
-
-    line-height:1;
 }
-
-
-/* ===========================
-   Button
-=========================== */
 
 .view-btn{
 
-    margin-top:28px;
+    margin-top:auto;
 
     width:100%;
 
-    padding:16px;
+    padding:15px;
 
-    border:none;
-    border-radius:10px;
-
-    background:#2563eb;
+    background:#f26d5b;
 
     color:white;
 
-    font-size:18px;
-    font-weight:600;
+    border:none;
+
+    border-radius:10px;
+
+    font-size:17px;
+
+    font-weight:bold;
 
     cursor:pointer;
 
-    transition:background .2s ease;
+    transition:.25s;
 }
 
 .view-btn:hover{
 
-    background:#1d4ed8;
+    background:#e75a46;
 }
