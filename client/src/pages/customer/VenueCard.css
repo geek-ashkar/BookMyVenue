@@ -1,165 +1,204 @@
+/* ===========================
+   Venue Card
+=========================== */
+
 .venue-card{
     background:#fff;
-
     border-radius:16px;
-
     overflow:hidden;
 
-    box-shadow:0 8px 24px rgba(0,0,0,.08);
-
-    transition:.25s;
-
     display:flex;
-
     flex-direction:column;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:0.25s;
 }
 
 .venue-card:hover{
     transform:translateY(-6px);
-
-    box-shadow:0 16px 40px rgba(0,0,0,.15);
+    box-shadow:0 16px 35px rgba(0,0,0,.15);
 }
 
+/* ===========================
+   Image
+=========================== */
+
 .venue-image{
-
     width:100%;
-
-    height:220px;
-
+    height:130px;
     overflow:hidden;
 }
 
 .venue-thumbnail{
-
     width:100%;
-
     height:100%;
-
     object-fit:cover;
+    transition:0.35s;
+}
+
+.venue-card:hover .venue-thumbnail{
+    transform:scale(1.05);
 }
 
 .no-image{
-
     width:100%;
-
     height:100%;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     background:#f3f4f6;
-
     color:#6b7280;
 }
 
+/* ===========================
+   Content
+=========================== */
+
 .venue-content{
-
-    padding:22px;
-
+    padding:12px 14px;
     display:flex;
-
     flex-direction:column;
-
-    flex:1;
 }
 
+/* ===========================
+   Venue Name
+=========================== */
+
 .venue-name{
-
     margin:0;
+    font-size:20px;
+    font-weight:700;
+    line-height:1.2;
+}
 
-    font-size:30px;
+/* ===========================
+   City
+=========================== */
 
+.venue-city{
+    margin-top:10px;
+    margin-bottom:8px;
+
+    font-size:15px;
+    color:#6b7280;
+}
+
+/* ===========================
+   Category
+=========================== */
+
+.venue-category{
+    margin-top:2px;
+    padding:4px 10px;
+    font-size:12px;
+}
+
+/* ===========================
+   Divider
+=========================== */
+
+.venue-content hr{
+    margin:10px 0;
+}
+
+/* ===========================
+   Bottom
+=========================== */
+
+.venue-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+
+    margin:0 0 12px;
+}
+
+.bottom-item{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.bottom-item span{
+    font-size:12px;
+    color:#9ca3af;
+    font-weight:600;
+}
+
+.bottom-item strong{
+    font-size:17px;
     color:#111827;
 }
 
-.venue-city{
-
-    margin-top:12px;
-
-    color:#6b7280;
-
-    font-size:18px;
-}
-
-.venue-category{
-
-    margin-top:8px;
-
-    color:#6b7280;
-
-    font-size:17px;
-
-    text-transform:capitalize;
-}
-
-.venue-content hr{
-
-    margin:20px 0;
-
-    border:none;
-
-    border-top:1px solid #e5e7eb;
-}
-
-.venue-bottom{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-}
-
-.venue-bottom h3{
-
-    margin:0;
-
-    font-size:28px;
-}
-
-.venue-bottom span{
-
-    color:#6b7280;
+.right{
+    text-align:right;
 }
 
 .venue-price{
-
-    font-size:34px;
-
-    font-weight:bold;
-
-    color:#16a34a;
+    color:#16a34a !important;
+    font-size:24px !important;
+    font-weight:700;
 }
 
+/* ===========================
+   Button
+=========================== */
+
 .view-btn{
-
-    margin-top:auto;
-
     width:100%;
-
-    padding:15px;
-
-    background:#f26d5b;
-
-    color:white;
+    padding:12px;
 
     border:none;
-
     border-radius:10px;
 
-    font-size:17px;
+    background:#f26b5b;
+    color:#fff;
 
-    font-weight:bold;
+    font-size:15px;
+    font-weight:600;
 
     cursor:pointer;
-
-    transition:.25s;
+    transition:0.25s;
 }
 
 .view-btn:hover{
+    background:#e85b49;
+}
 
-    background:#e75a46;
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width:900px){
+
+    .venue-image{
+        height:170px;
+    }
+
+    .venue-name{
+        font-size:22px;
+    }
+
+}
+
+@media (max-width:600px){
+
+    .venue-image{
+        height:160px;
+    }
+
+    .venue-content{
+        padding:16px;
+    }
+
+    .venue-name{
+        font-size:20px;
+    }
+
+    .venue-price{
+        font-size:22px !important;
+    }
+
 }

@@ -21,46 +21,35 @@ function VenueCard({ venue }: VenueCardProps) {
   return (
     <div className="venue-card">
 
-      <div className="venue-image">
-        {venue.thumbnail ? (
-          <img
-            src={`http://localhost:5001/${venue.thumbnail}`}
-            alt={venue.name}
-            className="venue-thumbnail"
-          />
-        ) : (
-          <div className="no-image">
-            No Image Available
-          </div>
-        )}
-      </div>
+      <img
+        src={`http://localhost:5001/${venue.thumbnail}`}
+        alt={venue.name}
+        className="venue-thumbnail"
+      />
 
       <div className="venue-content">
 
-        <h2 className="venue-name">
-          {venue.name}
-        </h2>
+        <h2>{venue.name}</h2>
 
-        <p className="venue-city">
+        <p className="venue-location">
           📍 {venue.city}
-        </p>
-
-        <p className="venue-category">
-          {venue.category.replaceAll("_", " ")}
         </p>
 
         <hr />
 
-        <div className="venue-bottom">
+        <div className="venue-info">
 
           <div>
-            <h3>{venue.capacity}</h3>
+            <strong>{venue.capacity}</strong>
             <span>Guests</span>
           </div>
 
-          <div className="venue-price">
-            €
-            {Number(venue.base_price).toLocaleString()}
+          <div>
+            <strong>
+              €
+              {Number(venue.base_price).toLocaleString()}
+            </strong>
+            <span>/ hour</span>
           </div>
 
         </div>

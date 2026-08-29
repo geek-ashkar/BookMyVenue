@@ -1,19 +1,12 @@
 .venues-grid{
-
-    max-width:1500px;
-
-    margin:40px auto;
-
     display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:28px;
-
-    align-items:start;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+    max-width:1400px;
+    margin:30px auto;
 }
 
-@media(max-width:1400px){
+@media (max-width:1400px){
 
     .venues-grid{
 
@@ -23,7 +16,7 @@
 
 }
 
-@media(max-width:1000px){
+@media (max-width:1000px){
 
     .venues-grid{
 
@@ -33,7 +26,7 @@
 
 }
 
-@media(max-width:700px){
+@media (max-width:700px){
 
     .venues-grid{
 
@@ -41,4 +34,103 @@
 
     }
 
+}
+
+/* ===========================
+   Filter Section
+=========================== */
+
+.filter-bar{
+    max-width:1200px;
+    margin:50px auto;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.filter-row{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+
+/* Search */
+
+.search-input{
+    width:420px;
+    height:36px;
+
+    padding:0 20px;
+
+    font-size:16px;
+
+    border:1px solid #d1d5db;
+    border-radius:12px;
+
+    background:#fff;
+}
+
+/* Dropdowns */
+
+.category-filter{
+    width:260px;
+    height:36px;
+
+    padding:0 18px;
+
+    font-size:14px;
+
+    border:1px solid #d1d5db;
+    border-radius:12px;
+
+    background:#fff;
+}
+
+.city-filter,
+.price-filter,
+.capacity-filter{
+    width:220px;
+    height:36px;
+
+    padding:0 14px;
+
+    font-size:14px;
+
+    border:1px solid #d1d5db;
+    border-radius:12px;
+
+    background:#fff;
+}
+
+/* Focus */
+
+.search-input:focus,
+.category-filter:focus,
+.city-filter:focus,
+.price-filter:focus,
+.capacity-filter:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.15);
+}
+
+.my-bookings-btn{
+    background:#2563eb;
+    color:#fff;
+
+    border:none;
+    border-radius:12px;
+
+    padding:16px 32px;
+
+    font-size:18px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:.25s;
+}
+
+.my-bookings-btn:hover{
+    background:#1d4ed8;
 }
