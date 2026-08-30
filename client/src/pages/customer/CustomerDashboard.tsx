@@ -5,6 +5,7 @@ import VenueCard from "./VenueCard";
 import "./CustomerDashboard.css";
 import { useAuth } from "../../context/AuthContext";
 
+
 type Venue = {
   id: number;
   name: string;
@@ -26,7 +27,7 @@ function CustomerDashboard() {
   const [priceRange, setPriceRange] = useState("");
   const [capacityRange, setCapacityRange] = useState("");
 
-  const { user } = useAuth();
+  const { user ,logout} = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -128,6 +129,15 @@ function CustomerDashboard() {
             📅 My Bookings
           </button>
         )}
+
+        <button
+            className="logout-btn"
+            onClick={() => {
+                logout();
+                navigate("/");
+            }}>
+            Logout
+        </button>
 
       </div>
 

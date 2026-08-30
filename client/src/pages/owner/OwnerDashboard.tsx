@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
 import type { Venue } from "../../types/venue";
 import "./OwnerDashboard.css";
+import { useAuth } from "../../context/AuthContext";
 
 type VenueRecord = Venue & Record<string, unknown>;
 
@@ -54,6 +55,7 @@ function OwnerDashboard() {
   const [error, setError] = useState("");
   const [failedImages, setFailedImages] = useState<number[]>([]);
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   useEffect(() => {
     const fetchMyVenues = async () => {
@@ -152,6 +154,15 @@ function OwnerDashboard() {
         >
           <span aria-hidden="true">+</span>
           Add Venue
+        </button>
+
+        <button
+              className="logout-btn"
+              onClick={() => {
+                  logout();
+                  navigate("/");
+              }}>
+              Logout
         </button>
       </section>
 

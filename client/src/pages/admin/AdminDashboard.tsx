@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
+import { useAuth } from "../../context/AuthContext";
 
 type UsersSummary = {
   total_customers: number;
@@ -63,6 +64,7 @@ function AdminDashboard() {
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { logout } = useAuth();
 
   const navigate = useNavigate();
 
@@ -105,6 +107,15 @@ function AdminDashboard() {
       <h1>Admin Dashboard</h1>
 
         <h2 className="section-title"> Summary</h2>
+
+        <button
+            className="logout-btn"
+            onClick={() => {
+                logout();
+                navigate("/");
+            }}>
+            Logout
+        </button>
 
       <div className = "dashboard-grid">
         <div className = "dashboard-card"

@@ -220,3 +220,23 @@
     color:#6b7280;
     font-style:italic;
 }
+
+.logout-btn{
+    background:#ef4444;
+    color:#fff;
+
+    border:none;
+    border-radius:10px;
+
+    padding:14px 22px;
+
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:.25s;
+}
+
+.logout-btn:hover{
+    background:#dc2626;
+}
