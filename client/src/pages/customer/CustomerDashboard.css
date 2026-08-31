@@ -1,9 +1,11 @@
 .venues-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:22px;
     max-width:1400px;
-    margin:30px auto;
+    margin:40px auto;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+
+    gap:30px;
 }
 
 @media (max-width:1400px){

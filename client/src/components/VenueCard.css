@@ -1,0 +1,151 @@
+/* ===========================
+   Venue Card
+=========================== */
+
+.venue-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
+    transition:.3s;
+    display:flex;
+    flex-direction:column;
+}
+
+.venue-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 35px rgba(0,0,0,.14);
+}
+
+/* ===========================
+   Image
+=========================== */
+
+.venue-image{
+    width:100%;
+    height:220px;
+    overflow:hidden;
+}
+
+.venue-thumbnail{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.35s;
+}
+
+.venue-card:hover .venue-thumbnail{
+    transform:scale(1.05);
+}
+
+.no-image{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f3f4f6;
+    color:#6b7280;
+}
+
+/* ===========================
+   Content
+=========================== */
+
+.venue-content{
+    padding:22px;
+}
+
+.venue-name{
+    margin:0;
+    font-size:30px;
+    font-weight:700;
+    color:#111827;
+}
+
+.venue-city{
+    margin-top:12px;
+    color:#6b7280;
+    font-size:17px;
+}
+
+.venue-category{
+    display:inline-block;
+    margin-top:14px;
+    padding:8px 16px;
+    background:#eef4ff;
+    color:#2563eb;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.venue-content hr{
+    margin:22px 0;
+    border:none;
+    border-top:1px solid #e5e7eb;
+}
+
+/* ===========================
+   Bottom
+=========================== */
+
+.venue-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.bottom-item{
+    display:flex;
+    flex-direction:column;
+}
+
+.bottom-item span{
+    color:#9ca3af;
+    font-size:13px;
+    font-weight:600;
+}
+
+.bottom-item strong{
+    margin-top:8px;
+    font-size:30px;
+    color:#111827;
+}
+
+.bottom-item small{
+    margin-top:4px;
+    color:#6b7280;
+    font-size:15px;
+}
+
+.right{
+    text-align:right;
+}
+
+.venue-price{
+    color:#16a34a !important;
+    font-size:32px !important;
+}
+
+/* ===========================
+   Button
+=========================== */
+
+.view-btn{
+    width:100%;
+    margin-top:28px;
+    height:52px;
+    border:none;
+    border-radius:10px;
+    background:#f26d5b;
+    color:#fff;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.view-btn:hover{
+    background:#e85d49;
+}
