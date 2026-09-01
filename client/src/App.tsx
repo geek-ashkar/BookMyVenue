@@ -63,7 +63,7 @@ function App() {
           path="/venues"
           element={<CustomerDashboard />}
         />
-
+..
         <Route
           path="/venues/:id"
           element={<CustomerVenueDetailsPage />}
