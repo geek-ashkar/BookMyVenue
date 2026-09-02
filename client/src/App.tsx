@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import VenueListingPage from "./pages/VenueListingPage";
 
 import CustomerDashboard from "./pages/customer/CustomerDashboard";
 import OwnerDashboard from "./pages/owner/OwnerDashboard";
@@ -28,6 +29,7 @@ import MyBookingsPage from "./pages/customer/MyBookingsPage";
 import PaymentPage from "./pages/customer/PaymentPage";
 import OwnerBookingsPage from "./pages/owner/OwnerBookingsPage";
 import AddAdminPage from "./pages/admin/AddAdminPage";
+
 
 function App() {
   return (
@@ -60,10 +62,10 @@ function App() {
         />
 
         <Route
-          path="/venues"
-          element={<CustomerDashboard />}
+            path="/venues"
+            element={<VenueListingPage />}
         />
-..
+
         <Route
           path="/venues/:id"
           element={<CustomerVenueDetailsPage />}
