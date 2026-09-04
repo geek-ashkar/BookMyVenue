@@ -1,126 +1,151 @@
-/* ===========================
-   Venue Listing Page
-=========================== */
+/* =========================
+   Page
+========================= */
 
 .venue-page{
-    width:100%;
-    min-height:100vh;
     background:#f8fafc;
-    padding:50px 30px 80px;
+    min-height:100vh;
+    padding-bottom:60px;
 }
 
-/* ===========================
+/* =========================
    Header
-=========================== */
+========================= */
 
 .page-header{
     text-align:center;
-    margin-bottom:40px;
+    padding:70px 20px 40px;
 }
 
 .page-header h1{
     font-size:48px;
     font-weight:700;
     color:#111827;
-    margin-bottom:12px;
+    margin-bottom:15px;
 }
 
 .page-header p{
-    font-size:18px;
     color:#6b7280;
+    font-size:18px;
+    max-width:700px;
+    margin:auto;
+    line-height:1.7;
 }
 
-/* ===========================
+/* =========================
    Filters
-=========================== */
+========================= */
 
 .filter-container{
+    max-width:1450px;
+    margin:40px auto;
 
-    max-width:1400px;
-    margin:0 auto 35px;
+    display:grid;
+    grid-template-columns:
+        2fr
+        1fr
+        1fr
+        1fr
+        1fr;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:16px;
-    flex-wrap:wrap;
-
+    gap:18px;
+    padding:0 30px;
 }
 
 .filter-container input,
 .filter-container select{
 
-    height:46px;
+    height:58px;
 
-    padding:0 16px;
+    border:none;
 
-    border:1px solid #d1d5db;
+    border-radius:14px;
 
-    border-radius:10px;
+    padding:0 20px;
 
-    background:#fff;
+    font-size:16px;
 
-    font-size:15px;
+    background:white;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+
+    transition:.25s;
+}
+
+.filter-container input:focus,
+.filter-container select:focus{
+
+    outline:none;
+
+    box-shadow:
+    0 0 0 4px rgba(37,99,235,.15);
 
 }
 
-.filter-container input{
-
-    width:280px;
-
-}
-
-/* ===========================
-   Results Count
-=========================== */
+/* =========================
+   Results
+========================= */
 
 .results-count{
 
-    text-align:center;
+    max-width:1450px;
 
-    font-size:18px;
+    margin:20px auto;
+
+    padding:0 35px;
 
     color:#6b7280;
 
-    margin-bottom:30px;
+    font-size:17px;
 
 }
 
-/* ===========================
+/* =========================
    Venue Grid
-=========================== */
+========================= */
 
 .venue-grid{
 
-    max-width:1500px;
+    max-width:1450px;
 
     margin:auto;
 
+    padding:10px 30px 50px;
+
     display:grid;
 
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:
+        repeat(4,1fr);
 
     gap:28px;
 
 }
 
-/* ===========================
+/* =========================
    Empty State
-=========================== */
+========================= */
 
 .empty-state{
 
+    grid-column:1/-1;
+
+    background:white;
+
+    padding:80px;
+
     text-align:center;
 
-    margin-top:100px;
+    border-radius:18px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
 
 }
 
 .empty-state h2{
 
-    color:#111827;
-
     margin-bottom:10px;
+
+    font-size:34px;
 
 }
 
@@ -128,79 +153,83 @@
 
     color:#6b7280;
 
+    font-size:18px;
+
 }
 
-/* ===========================
+/* =========================
    Loading
-=========================== */
+========================= */
 
 .loading{
 
     text-align:center;
 
-    margin-top:100px;
+    padding:120px;
 
     font-size:28px;
 
 }
 
-/* ===========================
+/* =========================
    Responsive
-=========================== */
+========================= */
 
-@media (max-width:1400px){
+@media(max-width:1400px){
 
-    .venue-grid{
+.venue-grid{
 
-        grid-template-columns:repeat(3,1fr);
-
-    }
+grid-template-columns:repeat(3,1fr);
 
 }
 
-@media (max-width:1100px){
+.filter-container{
 
-    .venue-grid{
-
-        grid-template-columns:repeat(2,1fr);
-
-    }
+grid-template-columns:
+1fr
+1fr
+1fr;
 
 }
 
-@media (max-width:700px){
+}
 
-    .venue-page{
+@media(max-width:1000px){
 
-        padding:30px 15px;
+.venue-grid{
 
-    }
+grid-template-columns:repeat(2,1fr);
 
-    .venue-grid{
+}
 
-        grid-template-columns:1fr;
+.filter-container{
 
-    }
+grid-template-columns:1fr;
 
-    .page-header h1{
+}
 
-        font-size:36px;
+}
 
-    }
+@media(max-width:700px){
 
-    .filter-container{
+.page-header h1{
 
-        flex-direction:column;
+font-size:34px;
 
-        align-items:stretch;
+}
 
-    }
+.venue-grid{
 
-    .filter-container input,
-    .filter-container select{
+grid-template-columns:1fr;
 
-        width:100%;
+padding:20px;
 
-    }
+}
+
+.results-count{
+
+padding:0 20px;
+
+}
 
 }

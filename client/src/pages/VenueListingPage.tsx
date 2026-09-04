@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import api from "../services/api";
-import VenueCard from "../components/VenueCard";
+import PublicVenueCard from "../components/PublicVenueCard";
 import "./VenueListingPage.css";
 
 type Venue = {
@@ -274,14 +274,19 @@ function VenueListingPage() {
 
         <div className="venue-grid">
 
-          {filteredVenues.map((venue) => (
-
-            <VenueCard
-              key={venue.id}
-              venue={venue}
-            />
-
-          ))}
+          {filteredVenues.length === 0 ? (
+            <div className="empty-state">
+              <h2>No venues found</h2>
+              <p>Try changing your filters.</p>
+            </div>
+          ) : (
+            filteredVenues.map((venue) => (
+              <PublicVenueCard
+                key={venue.id}
+                venue={venue}
+              />
+            ))
+          )}
 
         </div>
 
