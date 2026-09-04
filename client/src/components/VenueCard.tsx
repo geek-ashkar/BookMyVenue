@@ -43,9 +43,9 @@ function VenueCard({ venue }: VenueCardProps) {
 
       <div className="venue-content">
 
-        <h2 className="venue-name">
+        <h3 className="venue-name">
           {venue.name}
-        </h2>
+        </h3>
 
         <p className="venue-city">
           📍 {venue.city}
@@ -55,12 +55,9 @@ function VenueCard({ venue }: VenueCardProps) {
           {category}
         </span>
 
-        <hr />
+        <div className="venue-info">
 
-        <div className="venue-bottom">
-
-          <div className="bottom-item">
-
+          <div className="info-item">
             <span>Capacity</span>
 
             <strong>
@@ -68,18 +65,19 @@ function VenueCard({ venue }: VenueCardProps) {
             </strong>
 
             <small>Guests</small>
-
           </div>
 
-          <div className="bottom-item right">
+          <div className="info-item right">
 
             <span>Starting From</span>
 
             <strong className="venue-price">
-              € {Number(venue.base_price).toLocaleString()}
+              €{Number(
+                venue.base_price
+              ).toLocaleString()}
             </strong>
 
-            <small>/ event</small>
+            <small>/event</small>
 
           </div>
 
@@ -87,7 +85,9 @@ function VenueCard({ venue }: VenueCardProps) {
 
         <button
           className="view-btn"
-          onClick={() => navigate(`/venues/${venue.id}`)}
+          onClick={() =>
+            navigate(`/venues/${venue.id}`)
+          }
         >
           View Details
         </button>

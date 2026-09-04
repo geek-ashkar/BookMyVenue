@@ -20,10 +20,14 @@ function VenueListingPage() {
 
   const [searchParams] = useSearchParams();
 
-  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const [search, setSearch] = useState(
+    searchParams.get("search") || ""
+  );
+
   const [category, setCategory] = useState(
     searchParams.get("category") || ""
   );
+
   const [city, setCity] = useState("");
   const [price, setPrice] = useState("");
   const [capacity, setCapacity] = useState("");
@@ -94,97 +98,194 @@ function VenueListingPage() {
     });
   }, [venues, search, category, city, price, capacity]);
 
-  if (loading) return <h2 className="loading">Loading venues...</h2>;
+  if (loading) {
+    return (
+      <h2 className="loading">
+        Loading venues...
+      </h2>
+    );
+  }
 
   return (
     <div className="venue-page">
 
       <div className="page-header">
+
         <h1>Browse Venues</h1>
+
         <p>
           Discover the perfect venue for weddings,
           meetings, conferences and celebrations.
         </p>
+
       </div>
 
       <div className="filter-container">
 
         <input
           type="text"
-          placeholder="Search venue, city or category..."
+          placeholder="Search venue..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) =>
+            setSearch(e.target.value)
+          }
         />
 
         <select
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) =>
+            setCategory(e.target.value)
+          }
         >
-          <option value="">All Categories</option>
-          <option value="banquet_hall">Banquet Hall</option>
-          <option value="conference_hall">Conference Hall</option>
-          <option value="meeting_room">Meeting Room</option>
-          <option value="studio">Studio</option>
-          <option value="rooftop">Rooftop</option>
-          <option value="cafe_space">Cafe Space</option>
-          <option value="auditorium">Auditorium</option>
+          <option value="">
+            All Categories
+          </option>
+
+          <option value="banquet_hall">
+            Banquet Hall
+          </option>
+
+          <option value="conference_hall">
+            Conference Hall
+          </option>
+
+          <option value="meeting_room">
+            Meeting Room
+          </option>
+
+          <option value="studio">
+            Studio
+          </option>
+
+          <option value="rooftop">
+            Rooftop
+          </option>
+
+          <option value="cafe_space">
+            Cafe Space
+          </option>
+
+          <option value="auditorium">
+            Auditorium
+          </option>
+
         </select>
 
         <select
           value={city}
-          onChange={(e) => setCity(e.target.value)}
+          onChange={(e) =>
+            setCity(e.target.value)
+          }
         >
-          <option value="">All Cities</option>
+
+          <option value="">
+            All Cities
+          </option>
 
           {cities.map((city) => (
-            <option key={city}>{city}</option>
+            <option
+              key={city}
+              value={city}
+            >
+              {city}
+            </option>
           ))}
+
         </select>
 
         <select
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) =>
+            setPrice(e.target.value)
+          }
         >
-          <option value="">Any Price</option>
-          <option value="under500">Under €500</option>
-          <option value="500-1000">€500-1000</option>
-          <option value="1000-5000">€1000-5000</option>
-          <option value="5000+">Above €5000</option>
+
+          <option value="">
+            Any Price
+          </option>
+
+          <option value="under500">
+            Under €500
+          </option>
+
+          <option value="500-1000">
+            €500 - €1000
+          </option>
+
+          <option value="1000-5000">
+            €1000 - €5000
+          </option>
+
+          <option value="5000+">
+            Above €5000
+          </option>
+
         </select>
 
         <select
           value={capacity}
-          onChange={(e) => setCapacity(e.target.value)}
+          onChange={(e) =>
+            setCapacity(e.target.value)
+          }
         >
-          <option value="">Any Capacity</option>
-          <option value="1-100">1-100</option>
-          <option value="101-300">101-300</option>
-          <option value="301-500">301-500</option>
-          <option value="500+">500+</option>
+
+          <option value="">
+            Any Capacity
+          </option>
+
+          <option value="1-100">
+            1 - 100
+          </option>
+
+          <option value="101-300">
+            101 - 300
+          </option>
+
+          <option value="301-500">
+            301 - 500
+          </option>
+
+          <option value="500+">
+            500+
+          </option>
+
         </select>
 
       </div>
 
       <div className="results-count">
-        {filteredVenues.length} venues found
+        {filteredVenues.length} venue
+        {filteredVenues.length !== 1 && "s"} found
       </div>
 
-      <div className="venue-grid">
+      {filteredVenues.length === 0 ? (
 
-        {filteredVenues.length === 0 ? (
-          <div className="empty-state">
-            No venues found.
-          </div>
-        ) : (
-          filteredVenues.map((venue) => (
+        <div className="empty-state">
+
+          <h2>No venues found</h2>
+
+          <p>
+            Try changing your search or filters.
+          </p>
+
+        </div>
+
+      ) : (
+
+        <div className="venue-grid">
+
+          {filteredVenues.map((venue) => (
+
             <VenueCard
               key={venue.id}
               venue={venue}
             />
-          ))
-        )}
 
-      </div>
+          ))}
+
+        </div>
+
+      )}
 
     </div>
   );

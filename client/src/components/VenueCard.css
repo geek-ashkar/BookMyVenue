@@ -1,30 +1,34 @@
-/* ===========================
+/* ==========================================
    Venue Card
-=========================== */
+========================================== */
 
 .venue-card{
-    background:#fff;
-    border-radius:18px;
+    background:#ffffff;
+    border-radius:16px;
     overflow:hidden;
-    box-shadow:0 8px 22px rgba(0,0,0,.08);
-    transition:.3s;
     display:flex;
     flex-direction:column;
+
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+    transition:.3s ease;
+
+    height:100%;
 }
 
 .venue-card:hover{
     transform:translateY(-6px);
-    box-shadow:0 18px 35px rgba(0,0,0,.14);
+    box-shadow:0 14px 32px rgba(0,0,0,.14);
 }
 
-/* ===========================
+/* ==========================================
    Image
-=========================== */
+========================================== */
 
 .venue-image{
     width:100%;
-    height:220px;
+    height:190px;
     overflow:hidden;
+    background:#f3f4f6;
 }
 
 .venue-thumbnail{
@@ -35,117 +39,193 @@
 }
 
 .venue-card:hover .venue-thumbnail{
-    transform:scale(1.05);
+    transform:scale(1.06);
 }
 
 .no-image{
     width:100%;
     height:100%;
+
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#f3f4f6;
+
     color:#6b7280;
+    background:#eef2f7;
 }
 
-/* ===========================
+/* ==========================================
    Content
-=========================== */
+========================================== */
 
 .venue-content{
-    padding:22px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
 }
 
 .venue-name{
     margin:0;
-    font-size:30px;
+
+    font-size:22px;
     font-weight:700;
+
     color:#111827;
+
+    line-height:1.3;
+
+    min-height:56px;
 }
 
 .venue-city{
-    margin-top:12px;
+
+    margin:12px 0 8px;
+
+    font-size:15px;
+
     color:#6b7280;
-    font-size:17px;
+
 }
 
 .venue-category{
+
     display:inline-block;
-    margin-top:14px;
-    padding:8px 16px;
+
+    width:fit-content;
+
+    padding:6px 14px;
+
     background:#eef4ff;
+
     color:#2563eb;
+
     border-radius:30px;
-    font-size:14px;
-    font-weight:600;
-}
 
-.venue-content hr{
-    margin:22px 0;
-    border:none;
-    border-top:1px solid #e5e7eb;
-}
-
-/* ===========================
-   Bottom
-=========================== */
-
-.venue-bottom{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-}
-
-.bottom-item{
-    display:flex;
-    flex-direction:column;
-}
-
-.bottom-item span{
-    color:#9ca3af;
     font-size:13px;
+
     font-weight:600;
+
 }
 
-.bottom-item strong{
-    margin-top:8px;
-    font-size:30px;
+/* ==========================================
+   Information
+========================================== */
+
+.venue-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    margin-top:22px;
+
+    margin-bottom:22px;
+
+}
+
+.info-item{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.info-item span{
+
+    font-size:12px;
+
+    color:#9ca3af;
+
+    margin-bottom:6px;
+
+    font-weight:600;
+
+}
+
+.info-item strong{
+
+    font-size:22px;
+
     color:#111827;
+
 }
 
-.bottom-item small{
-    margin-top:4px;
+.info-item small{
+
+    margin-top:3px;
+
     color:#6b7280;
-    font-size:15px;
+
+    font-size:13px;
+
 }
 
 .right{
+
     text-align:right;
+
 }
 
 .venue-price{
+
     color:#16a34a !important;
-    font-size:32px !important;
+
+    font-size:24px !important;
+
 }
 
-/* ===========================
+/* ==========================================
    Button
-=========================== */
+========================================== */
 
 .view-btn{
+
+    margin-top:auto;
+
     width:100%;
-    margin-top:28px;
-    height:52px;
+
+    height:46px;
+
     border:none;
+
     border-radius:10px;
-    background:#f26d5b;
+
+    background:#2563eb;
+
     color:#fff;
-    font-size:17px;
+
+    font-size:15px;
+
     font-weight:600;
+
     cursor:pointer;
-    transition:.3s;
+
+    transition:.25s;
+
 }
 
 .view-btn:hover{
-    background:#e85d49;
+
+    background:#1d4ed8;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width:900px){
+
+    .venue-image{
+        height:170px;
+    }
+
+    .venue-name{
+        font-size:20px;
+    }
+
 }
