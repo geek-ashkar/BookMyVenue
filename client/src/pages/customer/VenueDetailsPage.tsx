@@ -170,10 +170,11 @@ function VenueDetailsPage () {
           className="book-btn"
           onClick={() => {
 
-            if (!token) {
-              navigate("/login");
-              return;
-            }
+            if (!user || !token) {
+                  alert("Please login to book this venue.");
+                  navigate("/login");
+                  return;
+              }
 
             if (user?.role !== "customer") {
               alert("Only customers can book venues.");
