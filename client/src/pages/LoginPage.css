@@ -1,0 +1,325 @@
+/* ===========================
+   Login Page
+=========================== */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8fafc,
+      #eef4ff
+    );
+}
+
+/* ===========================
+   Login Card
+=========================== */
+
+.login-card {
+  width: 100%;
+  max-width: 470px;
+
+  background: #ffffff;
+
+  border-radius: 22px;
+
+  padding: 38px;
+
+  box-shadow:
+    0 20px 60px rgba(15, 23, 42, 0.12);
+
+  border: 1px solid #eef2f7;
+}
+
+/* ===========================
+   Brand
+=========================== */
+
+.login-brand {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.login-brand a {
+  text-decoration: none;
+
+  font-size: 24px;
+  font-weight: 800;
+
+  color: #111827;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-header h1 {
+  margin: 0;
+
+  font-size: 36px;
+  font-weight: 750;
+
+  color: #111827;
+}
+
+.login-header p {
+  margin-top: 10px;
+
+  font-size: 15px;
+
+  color: #6b7280;
+}
+
+/* ===========================
+   Form
+=========================== */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-field label {
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #374151;
+}
+
+.login-field input {
+  width: 100%;
+  height: 52px;
+
+  padding: 0 16px;
+
+  border-radius: 12px;
+
+  border: 1px solid #d1d5db;
+
+  background: #ffffff;
+
+  color: #111827;
+
+  font-size: 15px;
+
+  box-sizing: border-box;
+
+  transition: 0.2s;
+}
+
+.login-field input::placeholder {
+  color: #9ca3af;
+}
+
+.login-field input:focus {
+  outline: none;
+
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+/* ===========================
+   Login Button
+=========================== */
+
+.login-submit-btn {
+  width: 100%;
+  height: 52px;
+
+  margin-top: 4px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #2563eb;
+
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+.login-submit-btn:hover {
+  background: #1d4ed8;
+}
+
+.login-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   Divider
+=========================== */
+
+.login-divider {
+  position: relative;
+
+  text-align: center;
+
+  margin: 30px 0 24px;
+}
+
+.login-divider::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  top: 50%;
+
+  height: 1px;
+
+  background: #e5e7eb;
+}
+
+.login-divider span {
+  position: relative;
+
+  padding: 0 14px;
+
+  background: #ffffff;
+
+  color: #9ca3af;
+
+  font-size: 13px;
+}
+
+/* ===========================
+   Registration
+=========================== */
+
+.login-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.register-customer-btn {
+  width: 100%;
+
+  padding: 14px;
+
+  box-sizing: border-box;
+
+  border-radius: 12px;
+
+  border: 1px solid #2563eb;
+
+  color: #2563eb;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  transition: 0.25s;
+}
+
+.register-customer-btn:hover {
+  background: #eff6ff;
+}
+
+.owner-register {
+  padding: 18px;
+
+  text-align: center;
+
+  background: #f8fafc;
+
+  border-radius: 14px;
+}
+
+.owner-register p {
+  margin: 0 0 8px;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+.owner-register a {
+  color: #f26d5b;
+
+  text-decoration: none;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.owner-register a:hover {
+  text-decoration: underline;
+}
+
+/* ===========================
+   Back Home
+=========================== */
+
+.login-home-link {
+  margin-top: 28px;
+
+  text-align: center;
+}
+
+.login-home-link a {
+  color: #6b7280;
+
+  text-decoration: none;
+
+  font-size: 14px;
+}
+
+.login-home-link a:hover {
+  color: #111827;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 550px) {
+
+  .login-page {
+    padding: 20px 14px;
+  }
+
+  .login-card {
+    padding: 28px 22px;
+    border-radius: 18px;
+  }
+
+  .login-header h1 {
+    font-size: 30px;
+  }
+
+}
