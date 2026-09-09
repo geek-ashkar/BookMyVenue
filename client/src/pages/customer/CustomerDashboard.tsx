@@ -119,25 +119,28 @@ function CustomerDashboard() {
 
         </div>
 
-        {user && (
-          <button
-            className="my-bookings-btn"
-            onClick={() =>
-              navigate("/customer/my-bookings")
-            }
-          >
-            📅 My Bookings
-          </button>
-        )}
+       <div className="dashboard-actions">
 
-        <button
+          {user && (
+            <button
+              className="my-bookings-btn"
+              onClick={() => navigate("/customer/my-bookings")}
+            >
+              📅 My Bookings
+            </button>
+          )}
+
+          <button
             className="logout-btn"
             onClick={() => {
-                logout();
-                navigate("/");
-            }}>
+              logout();
+              navigate("/");
+            }}
+          >
             Logout
-        </button>
+          </button>
+
+        </div>
 
       </div>
 

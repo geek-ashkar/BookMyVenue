@@ -8,6 +8,15 @@
     gap:30px;
 }
 
+.dashboard-actions{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;          /* space between buttons */
+    margin:35px 0;
+    flex-wrap:wrap;
+}
+
 @media (max-width:1400px){
 
     .venues-grid{
@@ -133,31 +142,32 @@
     transition:.25s;
 }
 
-.my-bookings-btn:hover{
-    background:#1d4ed8;
+.my-bookings-btn{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    padding:16px 30px;
+    min-width:220px;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
 }
 
-.dashboard-actions{
-    position:absolute;
-    top:0;
-    right:0;
-
-    display:flex;
-    gap:12px;
+.my-bookings-btn:hover{
+    background:#1d4ed8;
 }
 
 .logout-btn{
     background:#ef4444;
     color:#fff;
-
     border:none;
-    border-radius:10px;
-
-    padding:14px 22px;
-
-    font-size:16px;
+    border-radius:12px;
+    padding:16px 30px;
+    min-width:140px;
+    font-size:18px;
     font-weight:600;
-
     cursor:pointer;
     transition:.25s;
 }
