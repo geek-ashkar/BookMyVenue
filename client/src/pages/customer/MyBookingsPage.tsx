@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import "./MyBookingsPage.css";
+import { useNavigate } from "react-router-dom";
 
 type Booking = {
   booking_id: number;
@@ -25,6 +26,7 @@ function MyBookingsPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -100,7 +102,24 @@ function MyBookingsPage() {
 
   return (
   <div className="my-bookings-page">
-
+            <button
+          onClick={() => navigate("/customer/dashboard")}
+          style={{
+            position: "absolute",
+            top: "30px",
+            left: "40px",
+            padding: "10px 18px",
+            border: "none",
+            borderRadius: "8px",
+            backgroundColor: "#1f2937",
+            color: "white",
+            fontSize: "15px",
+            fontWeight: 600,
+            cursor: "pointer",
+          }}
+        >
+          ← Back to Dashboard
+        </button>
     <div className="page-header">
       <h1>My Bookings</h1>
       <p>Manage all your venue bookings in one place.</p>
