@@ -59,12 +59,18 @@ function BookingSuccessPage() {
           <div className="detail-row">
             <span>Booking Status</span>
             <strong>{booking.booking_status}</strong>
+
+
+
           </div>
 
           <div className="detail-row">
             <span>Payment Status</span>
             <strong>{payment?.payment_status}</strong>
           </div>
+
+
+
 
           <div className="detail-row">
             <span>Total Amount</span>
