@@ -178,9 +178,6 @@
             }
           >
 
-
-
-
             <option value="">
               All Cities
             </option>
