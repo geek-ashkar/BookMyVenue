@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./MyBookingsPage.css";
-import { useNavigate } from "react-router-dom";
 
 type Booking = {
   booking_id: number;
@@ -22,343 +22,613 @@ type Booking = {
 };
 
 function MyBookingsPage() {
-
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+
+  const [selectedBooking, setSelectedBooking] =
+    useState<Booking | null>(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-
     const fetchBookings = async () => {
-
       try {
+        const response = await api.get(
+          "/bookings/my-bookings"
+        );
 
-        const response = await api.get("/bookings/my-bookings");
-
-        setBookings(response.data.bookings);
-
+        setBookings(response.data.bookings ?? []);
       } catch (error) {
-
         console.error(error);
-
       } finally {
-
         setLoading(false);
-
       }
-
     };
 
     fetchBookings();
-
   }, []);
 
-  const handleCancelBooking = async (bookingId: number) => {
+  /* =========================
+     Format Booking Date
+  ========================= */
 
-  const confirmCancel = window.confirm(
-    "Are you sure you want to cancel this booking?"
-  );
+  const formatBookingDate = (
+    dateString: string
+  ) => {
+    return new Date(dateString).toLocaleDateString(
+      "en-GB",
+      {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }
+    );
+  };
 
-  if (!confirmCancel) {
-    return;
-  }
+  /* =========================
+     Format Time
+  ========================= */
 
-  try {
+  const formatTime = (
+    timeString: string
+  ) => {
+    return timeString.slice(0, 5);
+  };
 
-    const response = await api.patch(
-      `/bookings/${bookingId}/cancel`
+  /* =========================
+     Format Created Date
+  ========================= */
+
+  const formatCreatedDate = (
+    dateString: string
+  ) => {
+    return new Date(dateString).toLocaleDateString(
+      "en-GB",
+      {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }
+    );
+  };
+
+  const formatCreatedTime = (
+    dateString: string
+  ) => {
+    return new Date(dateString).toLocaleTimeString(
+      "en-GB",
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+      }
+    );
+  };
+
+  /* =========================
+     Format Category
+  ========================= */
+
+  const formatCategory = (
+    category: string
+  ) => {
+    return category
+      .replaceAll("_", " ")
+      .replace(/\b\w/g, (character) =>
+        character.toUpperCase()
+      );
+  };
+
+  /* =========================
+     Format Status
+  ========================= */
+
+  const formatStatus = (
+    status: string
+  ) => {
+    return status
+      .replaceAll("_", " ")
+      .replace(/\b\w/g, (character) =>
+        character.toUpperCase()
+      );
+  };
+
+  /* =========================
+     Cancel Booking
+  ========================= */
+
+  const handleCancelBooking = async (
+    bookingId: number
+  ) => {
+    const confirmCancel = window.confirm(
+      "Are you sure you want to cancel this booking?"
     );
 
-    alert(response.data.message);
+    if (!confirmCancel) {
+      return;
+    }
 
-    setBookings((previousBookings) =>
-      previousBookings.map((booking) =>
-        booking.booking_id === bookingId
-          ? {
-              ...booking,
-              booking_status: "cancelled",
-              payment_status: "cancelled",
-            }
-          : booking
-      )
-    );
+    try {
+      const response = await api.patch(
+        `/bookings/${bookingId}/cancel`
+      );
 
-  } catch (error: any) {
+      alert(response.data.message);
 
-    console.error(error);
+      setBookings((previousBookings) =>
+        previousBookings.map((booking) =>
+          booking.booking_id === bookingId
+            ? {
+                ...booking,
+                booking_status: "cancelled",
+                payment_status: "refunded",
+              }
+            : booking
+        )
+      );
 
-    alert(
-      error.response?.data?.message ||
-      "Failed to cancel booking."
-    );
-  }
-};
+      if (
+        selectedBooking?.booking_id ===
+        bookingId
+      ) {
+        setSelectedBooking({
+          ...selectedBooking,
+          booking_status: "cancelled",
+          payment_status: "refunded",
+        });
+      }
+    } catch (error: any) {
+      console.error(error);
+
+      alert(
+        error.response?.data?.message ||
+          "Failed to cancel booking."
+      );
+    }
+  };
 
   if (loading) {
-    return <h2>Loading bookings...</h2>;
+    return (
+      <div className="bookings-loading">
+        Loading bookings...
+      </div>
+    );
   }
 
-
   return (
-  <div className="my-bookings-page">
-            <button
-          onClick={() => navigate("/customer/dashboard")}
-          style={{
-            position: "absolute",
-            top: "30px",
-            left: "40px",
-            padding: "10px 18px",
-            border: "none",
-            borderRadius: "8px",
-            backgroundColor: "#1f2937",
-            color: "white",
-            fontSize: "15px",
-            fontWeight: 600,
-            cursor: "pointer",
-          }}
-        >
-          ← Back to Dashboard
-        </button>
-    <div className="page-header">
-      <h1>My Bookings</h1>
-      <p>Manage all your venue bookings in one place.</p>
-    </div>
+    <div className="my-bookings-page">
 
-    {bookings.length === 0 ? (
+      {/* Back Button */}
 
-      <div className="empty-state">
-        <h2>No Bookings Yet</h2>
+      <button
+        className="back-dashboard-btn"
+        onClick={() =>
+          navigate("/customer/dashboard")
+        }
+      >
+        ← Back to Dashboard
+      </button>
+
+      {/* Page Header */}
+
+      <div className="bookings-page-header">
+        <h1>My Bookings</h1>
+
         <p>
-          You haven't booked any venues yet.
+          Manage all your venue bookings in one
+          place.
         </p>
       </div>
 
-    ) : (
+      {/* Empty */}
 
-      <div className="bookings-list">
+      {bookings.length === 0 ? (
+        <div className="bookings-empty-state">
+          <div className="empty-icon">
+            📅
+          </div>
 
-        {bookings.map((booking) => (
+          <h2>No Bookings Yet</h2>
 
-          <div
-            key={booking.booking_id}
-            className="booking-card"
+          <p>
+            You haven't booked any venues yet.
+          </p>
+
+          <button
+            onClick={() =>
+              navigate("/venues")
+            }
           >
+            Browse Venues
+          </button>
+        </div>
+      ) : (
+        <div className="bookings-list">
 
-            <div className="booking-top">
+          {bookings.map((booking) => (
 
-              <div>
+            <article
+              key={booking.booking_id}
+              className="customer-booking-card"
+            >
 
-                <h2><strong>{booking.venue_name}</strong></h2>
+              {/* Top */}
 
-                <p className="booking-category">
-                {booking.category.replace("_", " ")}
-                </p>
+              <div className="booking-top">
 
-                <p className="booked-on">
-                Booked on{" "}
-                {new Date(booking.created_at).toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric",
-                })}
-                {" • "}
-                {new Date(booking.created_at).toLocaleTimeString("en-GB", {
-                hour: "2-digit",
-                minute: "2-digit",
-                })}
-            </p>
+                <div className="booking-title-section">
 
-            </div>
+                  <h2>
+                    {booking.venue_name}
+                  </h2>
 
-              <span
-                className={`status ${booking.booking_status}`}
-              >
-                {booking.booking_status.replace("_", " ")}
-              </span>
+                  <p className="booking-category">
+                    {formatCategory(
+                      booking.category
+                    )}
+                  </p>
 
-            </div>
+                  <p className="booked-on">
+                    Booked on{" "}
+                    {formatCreatedDate(
+                      booking.created_at
+                    )}
+                    {" • "}
+                    {formatCreatedTime(
+                      booking.created_at
+                    )}
+                  </p>
 
-            <div className="booking-details">
+                </div>
 
-
-              <div>
-                📅
-                <strong>Event Date</strong>
-                <span>{booking.booking_date}</span>
-              </div>
-
-              <div>
-                🕒
-                <strong>Time</strong>
-                <span>
-                  {booking.start_time} - {booking.end_time}
-                </span>
-              </div>
-
-              <div>
-                📍
-                <strong>City</strong>
-                <span>{booking.city}</span>
-              </div>
-
-              <div>
-                💶
-                <strong>Price</strong>
-                <span>
-                  € {Number(booking.total_amount).toLocaleString()}
-                </span>
-              </div>
-
-            </div>
-
-            <div className="booking-footer">
-
-              <div>
-
-                <small>Payment Status</small>
-
-                <p
-                  className={`payment ${booking.payment_status}`}
+                <span
+                  className={`booking-status booking-status--${booking.booking_status}`}
                 >
-                  {booking.payment_status}
-                </p>
+                  {formatStatus(
+                    booking.booking_status
+                  )}
+                </span>
 
               </div>
 
-              <div className="booking-buttons">
+              {/* Booking Details */}
 
-                <button
-                  className="details-btn"
-                  onClick={() => setSelectedBooking(booking)}
+              <div className="booking-details-grid">
+
+                <div className="booking-detail-box">
+
+                  <div className="detail-icon">
+                    📅
+                  </div>
+
+                  <strong>
+                    Event Date
+                  </strong>
+
+                  <span>
+                    {formatBookingDate(
+                      booking.booking_date
+                    )}
+                  </span>
+
+                </div>
+
+                <div className="booking-detail-box">
+
+                  <div className="detail-icon">
+                    🕒
+                  </div>
+
+                  <strong>
+                    Time
+                  </strong>
+
+                  <span>
+                    {formatTime(
+                      booking.start_time
+                    )}
+                    {" - "}
+                    {formatTime(
+                      booking.end_time
+                    )}
+                  </span>
+
+                </div>
+
+                <div className="booking-detail-box">
+
+                  <div className="detail-icon">
+                    📍
+                  </div>
+
+                  <strong>
+                    City
+                  </strong>
+
+                  <span>
+                    {booking.city}
+                  </span>
+
+                </div>
+
+                <div className="booking-detail-box">
+
+                  <div className="detail-icon">
+                    💶
+                  </div>
+
+                  <strong>
+                    Price
+                  </strong>
+
+                  <span>
+                    €
+                    {Number(
+                      booking.total_amount
+                    ).toLocaleString()}
+                  </span>
+
+                </div>
+
+              </div>
+
+              {/* Footer */}
+
+              <div className="booking-footer">
+
+                <div className="payment-section">
+
+                  <small>
+                    Payment Status
+                  </small>
+
+                  <p
+                    className={`payment-status payment-status--${booking.payment_status}`}
                   >
-                  View Details
-                </button>
+                    {formatStatus(
+                      booking.payment_status
+                    )}
+                  </p>
 
-                {(booking.booking_status === "pending_payment" ||
-                  booking.booking_status === "confirmed") && (
+                </div>
+
+                <div className="booking-buttons">
 
                   <button
-                  className="cancel-btn"
-                  onClick={() =>
-                   handleCancelBooking(booking.booking_id)
-                   }
-                    >
-                    Cancel Booking
+                    className="details-btn"
+                    onClick={() =>
+                      setSelectedBooking(
+                        booking
+                      )
+                    }
+                  >
+                    View Details
                   </button>
 
-                )}
+                  {(booking.booking_status ===
+                    "pending_payment" ||
+                    booking.booking_status ===
+                      "confirmed") && (
+
+                    <button
+                      className="cancel-btn"
+                      onClick={() =>
+                        handleCancelBooking(
+                          booking.booking_id
+                        )
+                      }
+                    >
+                      Cancel Booking
+                    </button>
+
+                  )}
+
+                </div>
+
+              </div>
+
+            </article>
+
+          ))}
+
+        </div>
+      )}
+
+      {/* Booking Details Modal */}
+
+      {selectedBooking && (
+
+        <div
+          className="booking-modal-overlay"
+          onClick={() =>
+            setSelectedBooking(null)
+          }
+        >
+
+          <div
+            className="booking-modal"
+            onClick={(event) =>
+              event.stopPropagation()
+            }
+          >
+
+            <div className="modal-header">
+
+              <div>
+                <h2>
+                  Booking Details
+                </h2>
+
+                <p>
+                  Booking #
+                  {selectedBooking.booking_id}
+                </p>
+              </div>
+
+              <button
+                className="modal-x-btn"
+                onClick={() =>
+                  setSelectedBooking(null)
+                }
+              >
+                ×
+              </button>
+
+            </div>
+
+            <div className="modal-content">
+
+              <div className="modal-row">
+
+                <span>
+                  Venue
+                </span>
+
+                <strong>
+                  {
+                    selectedBooking.venue_name
+                  }
+                </strong>
+
+              </div>
+
+              <div className="modal-row">
+
+                <span>
+                  Category
+                </span>
+
+                <strong>
+                  {formatCategory(
+                    selectedBooking.category
+                  )}
+                </strong>
+
+              </div>
+
+              <div className="modal-row">
+
+                <span>
+                  City
+                </span>
+
+                <strong>
+                  {selectedBooking.city}
+                </strong>
+
+              </div>
+
+              <div className="modal-row">
+
+                <span>
+                  Event Date
+                </span>
+
+                <strong>
+                  {formatBookingDate(
+                    selectedBooking.booking_date
+                  )}
+                </strong>
+
+              </div>
+
+              <div className="modal-row">
+
+                <span>
+                  Time
+                </span>
+
+                <strong>
+                  {formatTime(
+                    selectedBooking.start_time
+                  )}
+                  {" - "}
+                  {formatTime(
+                    selectedBooking.end_time
+                  )}
+                </strong>
+
+              </div>
+
+              <div className="modal-row">
+
+                <span>
+                  Booked On
+                </span>
+
+                <strong>
+                  {formatCreatedDate(
+                    selectedBooking.created_at
+                  )}
+                  {" • "}
+                  {formatCreatedTime(
+                    selectedBooking.created_at
+                  )}
+                </strong>
+
+              </div>
+
+              <div className="modal-row">
+
+                <span>
+                  Total Amount
+                </span>
+
+                <strong>
+                  €
+                  {Number(
+                    selectedBooking.total_amount
+                  ).toLocaleString()}
+                </strong>
+
+              </div>
+
+              <div className="modal-row">
+
+                <span>
+                  Booking Status
+                </span>
+
+                <strong>
+                  {formatStatus(
+                    selectedBooking.booking_status
+                  )}
+                </strong>
+
+              </div>
+
+              <div className="modal-row">
+
+                <span>
+                  Payment Status
+                </span>
+
+                <strong>
+                  {formatStatus(
+                    selectedBooking.payment_status
+                  )}
+                </strong>
 
               </div>
 
             </div>
+
+            <button
+              className="close-modal-btn"
+              onClick={() =>
+                setSelectedBooking(null)
+              }
+            >
+              Close
+            </button>
 
           </div>
 
-        ))}
+        </div>
 
-      </div>
-
-    )}
-
-    {selectedBooking && (
-
-  <div
-    className="booking-modal-overlay"
-    onClick={() => setSelectedBooking(null)}
-  >
-
-    <div
-      className="booking-modal"
-      onClick={(e) => e.stopPropagation()}
-    >
-
-      <h2>Booking Details</h2>
-
-      <div className="modal-row">
-        <span>Booking ID</span>
-        <strong>#{selectedBooking.booking_id}</strong>
-      </div>
-
-      <div className="modal-row">
-        <span>Venue</span>
-        <strong>{selectedBooking.venue_name}</strong>
-      </div>
-
-      <div className="modal-row">
-        <span>Category</span>
-        <strong>
-          {selectedBooking.category.replace("_", " ")}
-        </strong>
-      </div>
-
-      <div className="modal-row">
-        <span>City</span>
-        <strong>{selectedBooking.city}</strong>
-      </div>
-
-      <div className="modal-row">
-        <span>Event Date</span>
-        <strong>
-          {new Date(selectedBooking.booking_date).toLocaleDateString(
-            "en-GB",
-            {
-              day: "2-digit",
-              month: "short",
-              year: "numeric",
-            }
-          )}
-        </strong>
-      </div>
-
-      <div className="modal-row">
-        <span>Booked On</span>
-        <strong>
-          {new Date(selectedBooking.created_at).toLocaleString(
-            "en-GB"
-          )}
-        </strong>
-      </div>
-
-      <div className="modal-row">
-        <span>Time</span>
-        <strong>
-          {selectedBooking.start_time} - {selectedBooking.end_time}
-        </strong>
-      </div>
-
-      <div className="modal-row">
-        <span>Total Amount</span>
-        <strong>
-          € {Number(selectedBooking.total_amount).toLocaleString()}
-        </strong>
-      </div>
-
-      <div className="modal-row">
-        <span>Booking Status</span>
-        <strong>{selectedBooking.booking_status}</strong>
-      </div>
-
-      <div className="modal-row">
-        <span>Payment Status</span>
-        <strong>{selectedBooking.payment_status}</strong>
-      </div>
-
-      <button
-        className="close-modal-btn"
-        onClick={() => setSelectedBooking(null)}
-      >
-        Close
-      </button>
+      )}
 
     </div>
-
-  </div>
-
-)}
-
-  </div>
-);
+  );
 }
 
 export default MyBookingsPage;
