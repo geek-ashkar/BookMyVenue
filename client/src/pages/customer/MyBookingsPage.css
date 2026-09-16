@@ -13,9 +13,6 @@
 }
 
 
-/* =========================
-   Back Button
-========================= */
 
 .back-dashboard-btn {
   position: absolute;
@@ -45,9 +42,7 @@
 }
 
 
-/* =========================
-   Header
-========================= */
+
 
 .bookings-page-header {
   text-align: center;
@@ -72,9 +67,7 @@
 }
 
 
-/* =========================
-   Booking List
-========================= */
+
 
 .bookings-list {
   max-width: 900px;
@@ -89,9 +82,6 @@
 }
 
 
-/* =========================
-   Booking Card
-========================= */
 
 .customer-booking-card {
   background: white;
