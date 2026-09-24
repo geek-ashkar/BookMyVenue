@@ -70,34 +70,21 @@ body{
 
 .login-btn{
     padding:12px 22px;
-
     border:2px solid #2563eb;
-
     background:white;
-
     color:#2563eb;
-
     border-radius:8px;
-
     cursor:pointer;
-
     font-weight:600;
 }
 
 .hero-section{
-
     height:85vh;
-
     min-height: 640px;
-
     background-size:cover;
-
     background-position:center;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 }
 
