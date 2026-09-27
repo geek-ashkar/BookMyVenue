@@ -306,17 +306,11 @@
 .details-btn,
 .cancel-btn {
   border: none;
-
   border-radius: 9px;
-
   padding: 11px 20px;
-
   font-size: 14px;
-
   font-weight: 600;
-
   cursor: pointer;
-
   transition: 0.25s;
 }
 
@@ -350,17 +344,11 @@
 
 .bookings-empty-state {
   max-width: 600px;
-
   margin: 90px auto;
-
   text-align: center;
-
   background: white;
-
   padding: 60px 30px;
-
   border-radius: 18px;
-
   box-shadow:
     0 10px 35px rgba(0, 0, 0, 0.07);
 }
