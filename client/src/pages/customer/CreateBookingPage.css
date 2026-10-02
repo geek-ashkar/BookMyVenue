@@ -261,25 +261,15 @@ body{
 }
 
 .confirm-btn{
-
     flex:2;
-
     padding:16px;
-
     border:none;
-
     border-radius:10px;
-
     background:#16a34a;
-
     color:white;
-
     font-size:18px;
-
     font-weight:bold;
-
     cursor:pointer;
-
     transition:.25s;
 }
 
@@ -293,32 +283,26 @@ body{
 @media (max-width:768px){
 
     .booking-card{
-
         padding:30px;
     }
 
     .booking-card h1{
-
         font-size:38px;
     }
 
     .venue-id{
-
         font-size:18px;
     }
 
     .time-row{
-
         grid-template-columns:1fr;
     }
 
     .review-buttons{
-
         flex-direction:column;
     }
 
     .price-section h2{
-
-        font-size:36px;
+    font-size:36px;
     }
 }
