@@ -161,66 +161,42 @@ body{
 =========================== */
 
 .review-row{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     padding:18px 0;
-
     border-bottom:1px solid #ececec;
 }
 
 .review-row span{
-
     color:#6b7280;
-
     font-size:17px;
 }
 
 .review-row strong{
-
     color:#111827;
-
     font-size:18px;
 }
 
-/* ===========================
-   Price
-=========================== */
 
 .price-section{
-
     margin:35px 0;
-
     padding:25px;
-
     border-radius:15px;
-
     background:#f0fdf4;
-
     text-align:center;
-
     border:1px solid #bbf7d0;
 }
 
 .price-section p{
-
     margin:0;
-
     color:#6b7280;
-
     font-size:16px;
 }
 
 .price-section h2{
-
     margin-top:12px;
-
     color:#16a34a;
-
     font-size:48px;
 }
 
