@@ -148,17 +148,10 @@ body{
 }
 
 .booking-review h2{
-
     text-align:center;
-
     margin-bottom:30px;
-
     color:#111827;
 }
-
-/* ===========================
-   Review Rows
-=========================== */
 
 .review-row{
     display:flex;
