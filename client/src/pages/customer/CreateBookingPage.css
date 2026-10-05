@@ -74,8 +74,6 @@ body{
     box-shadow:0 0 0 4px rgba(37,99,235,.15);
 }
 
-
-
 .time-row{
 
     display:grid;
@@ -85,9 +83,6 @@ body{
     gap:20px;
 }
 
-/* ===========================
-   Booking Note
-=========================== */
 
 .booking-note{
 
@@ -102,9 +97,6 @@ body{
     line-height:1.6;
 }
 
-/* ===========================
-   Continue Button
-=========================== */
 
 .continue-btn{
 
@@ -133,10 +125,6 @@ body{
 
     background:#1d4ed8;
 }
-
-/* ===========================
-   Booking Summary
-=========================== */
 
 .booking-review{
 
