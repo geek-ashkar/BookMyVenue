@@ -1,55 +1,36 @@
 .payment-page{
-
     min-height:100vh;
-
     background:#f5f7fb;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     padding:40px;
 }
 
 .payment-card{
-
     width:100%;
-
     max-width:650px;
-
     background:white;
-
     border-radius:18px;
-
     padding:40px;
-
     box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
 .payment-card h1{
     padding : 20px;
     margin-top:0;
-    
     margin-bottom:8px;
 }
 
 .payment-subtitle{
-
     color:#e43170;
-
     margin-bottom:40px;
 }
 
 .payment-summary{
-
     background:#f9fafb;
-
     padding:25px;
-
     border-radius:12px;
-
     margin-bottom:30px;
 }
 
