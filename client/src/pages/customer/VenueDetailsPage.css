@@ -465,25 +465,15 @@
 }
 
 .nearby-btn{
-
     display:inline-block;
-
     width:100%;
-
     text-align:center;
-
     padding:12px;
-
     background:#2563eb;
-
     color:white;
-
     text-decoration:none;
-
     border-radius:8px;
-
     font-weight:bold;
-
     transition:.3s;
 }
 
