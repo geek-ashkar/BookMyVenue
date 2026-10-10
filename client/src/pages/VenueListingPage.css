@@ -44,21 +44,13 @@
 
 .filter-container input,
 .filter-container select{
-
     height:58px;
-
     border:none;
-
     border-radius:14px;
-
     padding:0 20px;
-
     font-size:16px;
-
     background:white;
-
     box-shadow:0 5px 18px rgba(0,0,0,.06);
-
     transition:.25s;
 }
 
@@ -66,7 +58,6 @@
 .filter-container select:focus{
 
     outline:none;
-
     box-shadow:
     0 0 0 4px rgba(37,99,235,.15);
 
@@ -86,9 +77,6 @@
 
 }
 
-/* =========================
-   Venue Grid
-========================= */
 
 .venue-grid{
 
