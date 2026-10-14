@@ -135,33 +135,23 @@ grid-template-columns:
 }
 
 @media(max-width:1000px){
-
 .venue-grid{
 
 grid-template-columns:repeat(2,1fr);
-
 }
 
 .filter-container{
-
 grid-template-columns:1fr;
 
 }
-
 }
-
 @media(max-width:700px){
-
 .page-header h1{
-
 font-size:34px;
-
 }
 
 .venue-grid{
-
 grid-template-columns:1fr;
-
 padding:20px;
 
 }
