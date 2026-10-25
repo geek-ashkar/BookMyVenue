@@ -111,7 +111,6 @@
     font-size:28px;
 
 }
-
 @media(max-width:1400px){
 
 .venue-grid{
@@ -121,7 +120,6 @@ grid-template-columns:repeat(3,1fr);
 }
 
 .filter-container{
-
 grid-template-columns:
 1fr
 1fr
