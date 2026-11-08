@@ -8,20 +8,15 @@
 .add-admin-card{
 
     width:500px;
-
     background:white;
-
     border-radius:14px;
-
     padding:40px;
-
     box-shadow:0 8px 25px rgba(0,0,0,.12);
 }
 
 .add-admin-card h1{
 
     text-align:center;
-
     margin-bottom:10px;
 }
 
