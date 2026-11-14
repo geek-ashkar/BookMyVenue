@@ -31,7 +31,8 @@
 
     display:flex;
 
-    flex-direction:column;
+    flex-direction:column; 
+    flex-direction:  02;
 
     gap:18px;
 }
