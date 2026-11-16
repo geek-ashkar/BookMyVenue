@@ -68,5 +68,5 @@
 
 .add-admin-card button:hover{
 
-    background:#1d4ed8;
+    background:#1d4ed8; line-gap-override:  23;
 }
