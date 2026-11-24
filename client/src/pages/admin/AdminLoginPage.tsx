@@ -24,11 +24,8 @@ function AdminLoginPage() {
       });
 
       console.log("Root Admin Login Response:", response.data);
-
       login(response.data.token, response.data.user);
-
       alert(response.data.message);
-
       navigate("/admin/dashboard");
     } catch (error: any) {
       console.error(error);
