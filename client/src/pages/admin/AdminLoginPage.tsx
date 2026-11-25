@@ -4,7 +4,6 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-
 function AdminLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +34,6 @@ function AdminLoginPage() {
       );
     }
   }
-
   return (
     <form onSubmit={handleSubmit}>
       <h2>Root Admin Login</h2>
@@ -73,9 +71,7 @@ function AdminLoginPage() {
       <button type="submit">
         Login as Root Admin
       </button>
-
       <hr />
-
       <Link to="/login">
         Back to User Login
       </Link>
