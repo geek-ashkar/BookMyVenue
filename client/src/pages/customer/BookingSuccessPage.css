@@ -16,19 +16,12 @@ body{
 }
 
 .success-card{
-
     width:100%;
-
     max-width:650px;
-
     background:white;
-
     border-radius:18px;
-
     padding:45px;
-
     box-shadow:0 10px 30px rgba(0,0,0,.08);
-
     text-align:center;
 }
 
