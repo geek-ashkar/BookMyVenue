@@ -3,15 +3,10 @@ body{
 }
 
 .success-page{
-
     min-height:100vh;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     padding:40px;
 }
 
@@ -26,9 +21,7 @@ body{
 }
 
 .success-icon{
-
     font-size:45px;
-
     margin-bottom:20px;
 }
 
